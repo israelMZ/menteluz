@@ -9,14 +9,11 @@
     
     <style>
         :root {
-            /* Colores Base */
             --bg-color: #FAEEE0;
             --text-dark: #1F2A38;
             --gold-light: #E4C092;
             --gold-dark: #B98B58;
             --white: #FFFFFF;
-            
-            /* Colores Organizador (Tonos Menta) */
             --mint-bg: #dcf0eb;
             --teal-dark: #1e4640;
             --teal-btn: #4ea896;
@@ -38,6 +35,7 @@
             min-height: 100vh;
         }
 
+        /* CONTENEDOR PRINCIPAL FIJO */
         .app-container {
             width: 100%;
             max-width: 400px;
@@ -45,20 +43,21 @@
             max-height: 100vh;
             background-color: var(--bg-color);
             position: relative;
-            overflow-y: auto;
-            overflow-x: hidden;
+            overflow: hidden; /* AHORA ES HIDDEN PARA ANCLAR LA BARRA */
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             border-radius: 40px;
             border: 8px solid #333;
             transition: background-color 0.3s ease;
         }
 
-        /* Vistas */
+        /* LAS VISTAS AHORA CONTROLAN EL SCROLL */
         .view {
             display: none;
             animation: fadeIn 0.3s ease-in-out;
-            padding-bottom: 90px;
-            min-height: 100%;
+            padding-bottom: 110px; /* Más espacio para que el contenido no quede oculto por la barra */
+            height: 100%;
+            overflow-y: auto; /* EL SCROLL OCURRE AQUÍ */
+            overflow-x: hidden;
         }
         
         .view.active {
@@ -70,7 +69,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Cabecera y Botón Principal (Inicio) */
+        /* Cabecera y Botón Principal */
         .header { text-align: center; padding: 40px 20px 20px; }
         .logo { font-family: 'Cinzel', serif; font-size: 28px; color: var(--text-dark); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .logo i { color: var(--gold-dark); font-size: 20px; }
@@ -88,8 +87,8 @@
         .wide-card i { font-size: 28px; color: var(--gold-dark); }
         .wide-card p { font-size: 13px; color: var(--text-dark); font-weight: 600; text-align: left; }
 
-        /* Navegación Inferior */
-        .bottom-nav { position: absolute; bottom: 0; width: 100%; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: flex-end; padding: 10px 20px 20px; border-top-left-radius: 30px; border-top-right-radius: 30px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 10; }
+        /* Navegación Inferior AHORA CON Z-INDEX ALTO */
+        .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: flex-end; padding: 10px 20px 20px; border-top-left-radius: 30px; border-top-right-radius: 30px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 999; }
         .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 10px; cursor: pointer; text-decoration: none; width: 50px; }
         .nav-item i { font-size: 18px; margin-bottom: 5px; }
         .nav-item.active { color: var(--gold-dark); }
@@ -101,7 +100,7 @@
         .inner-header { padding: 30px 20px 10px; display: flex; align-items: center; gap: 15px; }
         .btn-back { background: none; border: none; font-size: 18px; color: inherit; cursor: pointer; z-index: 2; position: relative;}
         
-        /* ---------------- TEST DE ESTRÉS ---------------- */
+        /* TEST DE ESTRÉS */
         #view-test { background-color: var(--bg-color); }
         .test-title { font-family: 'Cinzel', serif; font-size: 20px; color: var(--text-dark); }
         .test-subtitle { text-align: center; font-size: 13px; color: var(--gold-dark); font-weight: 700; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
@@ -112,12 +111,10 @@
         .scale-group { display: flex; justify-content: space-between; margin-top: 10px; }
         .scale-item { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; font-weight: bold; color: #555; }
         .scale-item input { width: 18px; height: 18px; accent-color: var(--gold-dark); }
-        
-        /* Sub-preguntas SISCO */
         .sub-question { margin-top: 20px; padding-top: 15px; border-top: 1px solid #f0f0f0; }
         .sub-question p { font-size: 13px; color: var(--text-dark); font-weight: 600; margin-bottom: 12px; }
 
-        /* ---------------- ORGANIZADOR DE TAREAS ---------------- */
+        /* ORGANIZADOR DE TAREAS */
         #view-tasks { background: linear-gradient(to bottom, #e3f5f1, #bde3dc); }
         #view-tasks .inner-header { color: var(--teal-dark); }
         .tasks-header-content { text-align: center; margin-bottom: 20px; color: var(--teal-dark); margin-top: -30px; }
@@ -142,7 +139,6 @@
         .focus-mode { text-align: center; font-size: 13px; font-weight: 700; color: var(--teal-dark); margin: 20px 0 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-session { background: linear-gradient(to right, #4ea896, #2d7a6b); color: var(--white); border: none; width: 85%; padding: 16px; border-radius: 30px; font-size: 14px; font-weight: 800; display: block; margin: 0 auto 30px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 5px 15px rgba(45, 122, 107, 0.4); border: 2px solid rgba(255, 255, 255, 0.5); transition: transform 0.2s; }
         .btn-session:active { transform: scale(0.98); }
-
     </style>
 </head>
 <body>
@@ -214,185 +210,3 @@
 
                 <div class="question-box">
                     <p class="question-text">3. En una escala del (1) nunca al (5) siempre, señala con qué frecuencia te inquietaron las siguientes situaciones:</p>
-                    
-                    <div class="sub-question">
-                        <p>a. Sobrecarga de tareas y trabajos universitarios</p>
-                        <div class="scale-group">
-                            <label class="scale-item">1 <input type="radio" name="q3a" value="1"></label>
-                            <label class="scale-item">2 <input type="radio" name="q3a" value="2"></label>
-                            <label class="scale-item">3 <input type="radio" name="q3a" value="3"></label>
-                            <label class="scale-item">4 <input type="radio" name="q3a" value="4"></label>
-                            <label class="scale-item">5 <input type="radio" name="q3a" value="5"></label>
-                        </div>
-                    </div>
-
-                    <div class="sub-question">
-                        <p>b. Evaluaciones de los profesores (exámenes, proyectos)</p>
-                        <div class="scale-group">
-                            <label class="scale-item">1 <input type="radio" name="q3b" value="1"></label>
-                            <label class="scale-item">2 <input type="radio" name="q3b" value="2"></label>
-                            <label class="scale-item">3 <input type="radio" name="q3b" value="3"></label>
-                            <label class="scale-item">4 <input type="radio" name="q3b" value="4"></label>
-                            <label class="scale-item">5 <input type="radio" name="q3b" value="5"></label>
-                        </div>
-                    </div>
-
-                    <div class="sub-question">
-                        <p>c. Tiempo limitado para hacer los entregables</p>
-                        <div class="scale-group">
-                            <label class="scale-item">1 <input type="radio" name="q3c" value="1"></label>
-                            <label class="scale-item">2 <input type="radio" name="q3c" value="2"></label>
-                            <label class="scale-item">3 <input type="radio" name="q3c" value="3"></label>
-                            <label class="scale-item">4 <input type="radio" name="q3c" value="4"></label>
-                            <label class="scale-item">5 <input type="radio" name="q3c" value="5"></label>
-                        </div>
-                    </div>
-
-                    <div class="sub-question">
-                        <p>d. No entender los temas que se abordan en la clase</p>
-                        <div class="scale-group">
-                            <label class="scale-item">1 <input type="radio" name="q3d" value="1"></label>
-                            <label class="scale-item">2 <input type="radio" name="q3d" value="2"></label>
-                            <label class="scale-item">3 <input type="radio" name="q3d" value="3"></label>
-                            <label class="scale-item">4 <input type="radio" name="q3d" value="4"></label>
-                            <label class="scale-item">5 <input type="radio" name="q3d" value="5"></label>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="button" class="btn-main" style="margin-top: 10px; width: 85%;">VER RESULTADOS</button>
-                <br><br>
-            </form>
-        </div>
-
-        <div id="view-tasks" class="view">
-            <div class="inner-header">
-                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
-            </div>
-            
-            <div class="tasks-header-content">
-                <div class="tasks-logo">
-                    <i class="fa-regular fa-lightbulb"></i> MenteLuz
-                </div>
-                <h2 class="tasks-title">ORGANIZADOR<br>DE TAREAS</h2>
-            </div>
-
-            <div class="task-card">
-                <div class="task-card-header">
-                    <div class="task-card-title">1. Sector Académico <span class="task-card-subtitle">(Enfoque Universitario)</span></div>
-                    <div class="progress-pill"><div class="fill"></div></div>
-                </div>
-                <ul class="task-list">
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Lectura Activa:</strong> Completar capítulos o artículos pendientes.</span></li>
-                    <li><input type="checkbox"><span class="task-text"><strong>Avance de Tareas:</strong> Redactar ensayos, informes o proyectos.</span></li>
-                    <li><input type="checkbox"><span class="task-text"><strong>Preparación:</strong> Repasar conceptos para exámenes o presentaciones.</span></li>
-                </ul>
-                <i class="fa-solid fa-book-open card-icon"></i>
-            </div>
-
-            <div class="task-card">
-                <div class="task-card-header">
-                    <div class="task-card-title">2. Sector Laboral <span class="task-card-subtitle">(Productividad Consciente)</span></div>
-                    <div class="progress-pill"><div class="fill fill-2"></div></div>
-                </div>
-                <ul class="task-list">
-                    <li><input type="checkbox"><span class="task-text"><strong>Gestión:</strong> Responder correos y mensajes prioritarios del día.</span></li>
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Ejecución:</strong> Avanzar en los entregables clave del puesto.</span></li>
-                    <li><input type="checkbox"><span class="task-text"><strong>Planificación:</strong> Organizar la agenda y metas para el día siguiente.</span></li>
-                </ul>
-                <i class="fa-solid fa-chart-column card-icon"></i>
-            </div>
-
-            <div class="task-card">
-                <div class="task-card-header">
-                    <div class="task-card-title">3. Ritual MenteLuz <span class="task-card-subtitle">(Conexión con la Vela)</span></div>
-                </div>
-                <ul class="task-list">
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Activación:</strong> Encender la vela y elegir una playlist de la aplicación.</span></li>
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Reseteo:</strong> Hacer una pausa de 3 minutos de respiración profunda.</span></li>
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Cierre:</strong> Apagar la vela y marcar los logros alcanzados en el día.</span></li>
-                </ul>
-                <i class="fa-solid fa-fire-flame-curved card-icon"></i>
-            </div>
-
-            <div class="focus-mode">
-                <i class="fa-solid fa-gear"></i> Modo de Enfoque
-            </div>
-
-            <button class="btn-session">COMENZAR SESIÓN MENTELUZ</button>
-        </div>
-
-        <nav class="bottom-nav">
-            <a href="#" class="nav-item active" id="nav-home">
-                <i class="fa-solid fa-house"></i>
-                <span>Inicio</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fa-regular fa-user"></i>
-                <span>Perfil</span>
-            </a>
-            <div class="nav-item nav-center">
-                <div class="circle">
-                    <i class="fa-solid fa-spa"></i>
-                </div>
-            </div>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-om"></i>
-                <span>Modo<br>Meditación</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-gear"></i>
-                <span>Ajustes</span>
-            </a>
-        </nav>
-    </div>
-
-    <script>
-        const container = document.getElementById('main-container');
-        const viewHome = document.getElementById('view-home');
-        const viewTest = document.getElementById('view-test');
-        const viewTasks = document.getElementById('view-tasks');
-        
-        const btnOpenTest = document.getElementById('btn-open-test');
-        const btnOpenTasks = document.getElementById('btn-open-tasks');
-        const btnsCloseView = document.querySelectorAll('.btn-close-view');
-        const navHome = document.getElementById('nav-home');
-
-        // Ocultar todas las vistas
-        const hideAllViews = () => {
-            viewHome.classList.remove('active');
-            viewTest.classList.remove('active');
-            viewTasks.classList.remove('active');
-            container.style.backgroundColor = 'var(--bg-color)'; 
-        };
-
-        // Abrir Test
-        btnOpenTest.addEventListener('click', () => {
-            hideAllViews();
-            viewTest.classList.add('active');
-        });
-
-        // Abrir Tareas 
-        btnOpenTasks.addEventListener('click', () => {
-            hideAllViews();
-            viewTasks.classList.add('active');
-            container.style.backgroundColor = '#dcf0eb'; 
-        });
-
-        // Volver al Inicio
-        const goHome = () => {
-            hideAllViews();
-            viewHome.classList.add('active');
-        };
-
-        // Asignar función a los botones de retroceso
-        btnsCloseView.forEach(btn => {
-            btn.addEventListener('click', goHome);
-        });
-        
-        // Asignar función al icono de la casita
-        navHome.addEventListener('click', goHome);
-    </script>
-
-</body>
-</html>
