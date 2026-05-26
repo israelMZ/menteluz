@@ -34,7 +34,6 @@
             min-height: 100vh;
         }
 
-        /* Contenedor Principal (Fijo) */
         .app-container {
             width: 100%;
             max-width: 400px;
@@ -49,7 +48,6 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Vistas Internas (Controlan el Scroll) */
         .view {
             display: none;
             animation: fadeIn 0.3s ease-in-out;
@@ -58,17 +56,14 @@
             overflow-y: auto; 
             overflow-x: hidden;
         }
-        
         .view.active {
             display: block;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Cabecera y Botones */
         .header { text-align: center; padding: 40px 20px 20px; }
         .logo { font-family: 'Cinzel', serif; font-size: 28px; color: var(--text-dark); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .logo i { color: var(--gold-dark); font-size: 20px; }
@@ -76,7 +71,6 @@
         .btn-main { background: linear-gradient(to right, var(--gold-light), var(--gold-dark)); color: var(--white); border: none; width: 90%; padding: 15px; border-radius: 30px; font-size: 14px; font-weight: 700; letter-spacing: 1px; cursor: pointer; box-shadow: 0 4px 10px rgba(185, 139, 88, 0.4); margin-bottom: 30px; display: block; margin-left: auto; margin-right: auto; transition: transform 0.2s;}
         .btn-main:active { transform: scale(0.98); }
 
-        /* Cuadrícula de opciones */
         .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; margin-bottom: 15px; }
         .card { background-color: var(--white); border-radius: 20px; padding: 20px 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
         .card:active { transform: scale(0.95); }
@@ -86,7 +80,6 @@
         .wide-card i { font-size: 28px; color: var(--gold-dark); }
         .wide-card p { font-size: 13px; color: var(--text-dark); font-weight: 600; text-align: left; }
 
-        /* Navegación Inferior Fija */
         .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: flex-end; padding: 10px 20px 20px; border-top-left-radius: 30px; border-top-right-radius: 30px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 999; }
         .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 10px; cursor: pointer; text-decoration: none; width: 50px; }
         .nav-item i { font-size: 18px; margin-bottom: 5px; }
@@ -94,99 +87,12 @@
         .nav-center { position: relative; top: -20px; }
         .nav-center .circle { background: linear-gradient(to bottom right, var(--gold-light), var(--gold-dark)); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(185, 139, 88, 0.5); border: 4px solid var(--white); }
         .nav-center i { color: var(--white); font-size: 24px; margin: 0; }
-
-        /* Cabeceras Interiores */
-        .inner-header { padding: 30px 20px 10px; display: flex; align-items: center; gap: 15px; }
-        .btn-back { background: none; border: none; font-size: 18px; color: inherit; cursor: pointer; z-index: 2; position: relative;}
-        
-        /* Test de Estrés */
-        #view-test { background-color: var(--bg-color); }
-        .test-title { font-family: 'Cinzel', serif; font-size: 20px; color: var(--text-dark); }
-        .test-subtitle { text-align: center; font-size: 13px; color: var(--gold-dark); font-weight: 700; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
-        .question-box { background: var(--white); margin: 0 20px 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .question-text { font-size: 14px; color: var(--text-dark); font-weight: 600; margin-bottom: 15px; line-height: 1.5; }
-        .options-group { display: flex; gap: 20px; justify-content: center; }
-        .radio-label { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
-        .scale-group { display: flex; justify-content: space-between; margin-top: 10px; }
-        .scale-item { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; font-weight: bold; color: #555; }
-        .scale-item input { width: 18px; height: 18px; accent-color: var(--gold-dark); }
-        .sub-question { margin-top: 20px; padding-top: 15px; border-top: 1px solid #f0f0f0; }
-        .sub-question p { font-size: 13px; color: var(--text-dark); font-weight: 600; margin-bottom: 12px; }
-
-        /* Organizador, Playlists, Técnicas y Cronómetro (Menta) */
-        #view-tasks, #view-playlists, #view-techniques, #view-timer { background: linear-gradient(to bottom, #e3f5f1, #bde3dc); }
-        #view-tasks .inner-header, #view-playlists .inner-header, #view-techniques .inner-header, #view-timer .inner-header { color: var(--teal-dark); }
-        .tasks-header-content { text-align: center; margin-bottom: 20px; color: var(--teal-dark); margin-top: -30px; }
-        .tasks-logo { font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 5px; }
-        .tasks-title { font-size: 24px; font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; }
-        .task-card { background-color: var(--white); margin: 0 20px 15px; border-radius: 20px; padding: 15px 18px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); position: relative; overflow: hidden; }
-        .task-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .task-card-title { font-size: 15px; font-weight: 800; color: var(--text-dark); }
-        .task-card-subtitle { font-size: 12px; font-weight: 600; color: #666; display: block; margin-top: 2px; }
-        .progress-pill { width: 45px; height: 12px; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; display: flex; }
-        .progress-pill .fill { height: 100%; background-color: var(--teal-btn); width: 30%; }
-        .progress-pill .fill-2 { width: 60%; background-color: var(--teal-btn); }
-        .progress-pill .fill-3 { width: 100%; background-color: var(--teal-btn); }
-        
-        /* Checklists Genéricos */
-        .task-list { list-style: none; }
-        .task-list li { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
-        .task-list input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 2px solid var(--teal-light); border-radius: 50%; outline: none; cursor: pointer; position: relative; flex-shrink: 0; margin-top: 2px; background-color: var(--white); }
-        .task-list input[type="checkbox"]:checked { background-color: var(--teal-btn); border-color: var(--teal-btn); }
-        .task-list input[type="checkbox"]:checked::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 12px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        .task-text { font-size: 12px; color: var(--text-dark); line-height: 1.3; }
-        .task-text strong { font-weight: 800; }
-        .card-icon { position: absolute; bottom: 15px; right: 15px; font-size: 35px; color: var(--teal-light); opacity: 0.6; }
-        .focus-mode { text-align: center; font-size: 13px; font-weight: 700; color: var(--teal-dark); margin: 20px 0 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        
-        /* Botones de Acción */
-        .btn-session { background: linear-gradient(to right, #4ea896, #2d7a6b); color: var(--white); border: none; width: 85%; padding: 16px; border-radius: 30px; font-size: 14px; font-weight: 800; display: block; margin: 0 auto 30px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 5px 15px rgba(45, 122, 107, 0.4); border: 2px solid rgba(255, 255, 255, 0.5); transition: transform 0.2s; }
-        .btn-session:active { transform: scale(0.98); }
-        .btn-pause { background: transparent; border: 2px solid var(--teal-dark); color: var(--teal-dark); box-shadow: none; margin-top: 50px; }
-
-        /* Estilos Calendario Semanal */
-        .calendar-container { background-color: var(--white); margin: 0 20px 15px; border-radius: 20px; padding: 15px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); }
-        .calendar-title { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; text-align: center; text-transform: uppercase; }
-        .days-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
-        .day-bubble { width: 35px; height: 35px; border-radius: 50%; background-color: #e0e0e0; color: #555; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; cursor: pointer; transition: 0.2s; }
-        .day-bubble.active { background-color: var(--teal-btn); color: var(--white); box-shadow: 0 3px 8px rgba(78, 168, 150, 0.4); transform: scale(1.1); }
-        .daily-tasks h4 { font-size: 13px; color: var(--teal-dark); margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; font-weight: 800;}
-        .add-task-row { display: flex; gap: 8px; margin-bottom: 10px; }
-        .add-task-row input { flex: 1; border: 1px solid #ddd; border-radius: 10px; padding: 8px 10px; font-size: 12px; font-family: 'Nunito', sans-serif; outline: none; }
-        .add-task-row input:focus { border-color: var(--teal-btn); }
-        .add-task-row button { background-color: var(--teal-btn); color: white; border: none; border-radius: 10px; width: 35px; cursor: pointer; transition: 0.2s; }
-        .add-task-row button:active { transform: scale(0.9); }
-        .custom-daily-list li { margin-bottom: 8px; font-size: 12px; align-items: center; color: var(--text-dark); font-weight: 600;}
-
-        /* Estilos Playlists e Iconos */
-        .playlist-card { background-color: var(--white); margin: 0 20px 15px; border-radius: 15px; padding: 15px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.6); }
-        .playlist-card:active { transform: scale(0.98); }
-        .playlist-info { flex: 1; }
-        .playlist-title { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; text-transform: uppercase; }
-        .playlist-desc { font-size: 11px; color: #555; line-height: 1.3; font-weight: 600; }
-        .playlist-icon { font-size: 26px; color: var(--teal-btn); opacity: 0.8; width: 45px; text-align: center; }
-
-        /* Estilos Temporizador / Respiración */
-        .timer-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
-        .breathing-circle { width: 220px; height: 220px; border-radius: 50%; background: rgba(78, 168, 150, 0.2); display: flex; justify-content: center; align-items: center; position: relative; animation: breathe 8s infinite ease-in-out; border: 2px solid rgba(78, 168, 150, 0.4); }
-        .timer-display { font-size: 55px; font-weight: 800; color: var(--teal-dark); font-family: 'Nunito', sans-serif; text-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .breathing-text { color: var(--teal-dark); font-weight: 700; font-size: 16px; margin-top: 30px; letter-spacing: 1px; }
-
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); background: rgba(78, 168, 150, 0.35); }
-        }
-
-        /* Estilos Técnicas de Relajación (Pasos) */
-        .step-number { background-color: var(--teal-btn); color: var(--white); width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
     <div class="app-container" id="main-container">
-        <!-- --- TU APP HTML NORMAL AQUÍ --- -->
-        <!-- Header, menú, etc, igual que antes -->
-
+        <!-- PANTALLA DE INICIO -->
         <div id="view-home" class="view active">
             <header class="header">
                 <div class="logo">
@@ -215,37 +121,14 @@
                         <p>Organizador de<br>Tareas (Lab. y Univ.)</p>
                     </div>
                 </div>
-
-                <!-- ¡AQUÍ ESTÁ TU BOTÓN DE HORA DE RELAJARSE! -->
-                <div class="wide-card">
+                <!-- SOLO ESTE ES TU BOTÓN HORA DE RELAJARSE -->
+                <div class="wide-card" id="btn-hora-relajarse">
                     <i class="fa-solid fa-clock"></i>
                     <p>Hora de Relajarse<br>(Programar)</p>
                 </div>
             </main>
         </div>
-
-        <!-- ... el resto de tu app: Test, Playlists, Tasks, Techniques, Timer, Nav, etc ... -->
-        <!-- El código de tus otras vistas NO SE MODIFICA -->
-
-        <!-- MODAL PROGRAMAR RELAJACIÓN -->
-        <div id="modal-relax" style="display:none; position: fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(30,70,64,0.15); z-index:9999; align-items:center; justify-content:center;">
-          <div style="background: #fff; padding: 30px 20px; border-radius: 25px; box-shadow: 0 8px 30px rgba(30,70,64,0.25); max-width: 320px; width: 95%; text-align: center; position:relative;">
-            <h3 style="font-size:20px; margin-bottom: 15px; color:#1e4640;">Programa tu Hora de Relajación</h3>
-            <label for="relax-day" style="font-weight:600; font-size:13px;">Día</label>
-            <select id="relax-day" style="width:100%; border-radius: 10px; margin:10px 0 18px; padding:8px;">
-              <option>Lunes</option><option>Martes</option><option>Miércoles</option>
-              <option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option>
-            </select>
-            <label for="relax-time" style="font-weight:600; font-size:13px;">Hora</label>
-            <input type="time" id="relax-time" style="width:100%; border-radius:10px; margin:10px 0 18px; padding:8px;">
-            <div style="display:flex;gap:10px;justify-content:center;">
-              <button id="btn-confirm-relax" class="btn-main" style="width:50%;">Confirmar</button>
-              <button id="btn-cancel-relax" class="btn-main" style="background: #eee; color: #333; width:40%;">Cancelar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ... EL RESTO DE TU HTML: nav, footer, etc ... -->
+        <!-- MÁS VISTAS... (pon aquí tus otras pantallas/funcionalidades) -->
         <nav class="bottom-nav">
             <a href="#" class="nav-item active" id="nav-home">
                 <i class="fa-solid fa-house"></i>
@@ -270,27 +153,42 @@
             </a>
         </nav>
     </div>
+    <!-- MODAL FUERA DEL CONTENEDOR PRINCIPAL -->
+    <div id="modal-relax" style="display:none; position: fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(30,70,64,0.15); z-index:9999; align-items:center; justify-content:center;">
+      <div style="background: #fff; padding: 30px 20px; border-radius: 25px; box-shadow: 0 8px 30px rgba(30,70,64,0.25); max-width: 320px; width: 95%; text-align: center; position:relative;">
+        <h3 style="font-size:20px; margin-bottom: 15px; color:#1e4640;">Programa tu Hora de Relajación</h3>
+        <label for="relax-day" style="font-weight:600; font-size:13px;">Día</label>
+        <select id="relax-day" style="width:100%; border-radius: 10px; margin:10px 0 18px; padding:8px;">
+          <option>Lunes</option><option>Martes</option><option>Miércoles</option>
+          <option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option>
+        </select>
+        <label for="relax-time" style="font-weight:600; font-size:13px;">Hora</label>
+        <input type="time" id="relax-time" style="width:100%; border-radius:10px; margin:10px 0 18px; padding:8px;">
+        <div style="display:flex;gap:10px;justify-content:center;">
+          <button id="btn-confirm-relax" class="btn-main" style="width:50%;">Confirmar</button>
+          <button id="btn-cancel-relax" class="btn-main" style="background: #eee; color: #333; width:40%;">Cancelar</button>
+        </div>
+      </div>
+    </div>
     <script>
-        // Tu SCRIPT ORIGINAL...
-        // ... el mismo del primer mensaje, no lo borres, solo agrega esto al final:
+        // --- TU SCRIPT de navegación, tareas, etc, aquí antes si lo tienes ---
+        // El siguiente código sólo abre el modal con el botón correcto:
 
-        // --- PROGRAMAR HORA DE RELAJARSE ---
-        const btnRelax = document.querySelector('.wide-card');
+        const btnRelax = document.getElementById('btn-hora-relajarse');
         const modalRelax = document.getElementById('modal-relax');
         const btnConfirmRelax = document.getElementById('btn-confirm-relax');
         const btnCancelRelax = document.getElementById('btn-cancel-relax');
         const relaxDay = document.getElementById('relax-day');
         const relaxTime = document.getElementById('relax-time');
 
-        // Abrir modal al pulsar "Hora de Relajarse"
+        // Solo ese botón abre el modal
         if(btnRelax){
-            btnRelax.addEventListener('click', (e) => {
-                e.preventDefault();
+            btnRelax.addEventListener('click', () => {
                 modalRelax.style.display = 'flex';
             });
         }
 
-        // Cerrar modal
+        // Cierra modal
         btnCancelRelax.addEventListener('click', () => {
             modalRelax.style.display = 'none';
         });
@@ -303,12 +201,13 @@
                 alert("Por favor, selecciona una hora para relajarte.");
                 return;
             }
-            // Formatea la hora a formato 24h
             const [h, m] = time.split(':');
             const horaFormateada = `${h.padStart(2, '0')}:${m.padStart(2, '0')}`;
             alert(`¡Felicidades! 🎉\n\nHas programado tu momento de relajación para el ${day} a las ${horaFormateada}.\n¡Felicitaciones por dedicarte este tiempo!`);
             modalRelax.style.display = 'none';
         });
+
+        // ---- Aquí VA tu script de navegación original, menús, vistas, etc (como ya lo tenías) ----
     </script>
 </body>
 </html>
