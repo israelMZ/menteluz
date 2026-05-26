@@ -128,6 +128,8 @@
         .progress-pill .fill { height: 100%; background-color: var(--teal-btn); width: 30%; }
         .progress-pill .fill-2 { width: 60%; background-color: var(--teal-btn); }
         .progress-pill .fill-3 { width: 100%; background-color: var(--teal-btn); }
+        
+        /* Checklists Genéricos */
         .task-list { list-style: none; }
         .task-list li { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
         .task-list input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 2px solid var(--teal-light); border-radius: 50%; outline: none; cursor: pointer; position: relative; flex-shrink: 0; margin-top: 2px; background-color: var(--white); }
@@ -138,9 +140,24 @@
         .card-icon { position: absolute; bottom: 15px; right: 15px; font-size: 35px; color: var(--teal-light); opacity: 0.6; }
         .focus-mode { text-align: center; font-size: 13px; font-weight: 700; color: var(--teal-dark); margin: 20px 0 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
         
+        /* Botones de Acción */
         .btn-session { background: linear-gradient(to right, #4ea896, #2d7a6b); color: var(--white); border: none; width: 85%; padding: 16px; border-radius: 30px; font-size: 14px; font-weight: 800; display: block; margin: 0 auto 30px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 5px 15px rgba(45, 122, 107, 0.4); border: 2px solid rgba(255, 255, 255, 0.5); transition: transform 0.2s; }
         .btn-session:active { transform: scale(0.98); }
         .btn-pause { background: transparent; border: 2px solid var(--teal-dark); color: var(--teal-dark); box-shadow: none; margin-top: 50px; }
+
+        /* Estilos Calendario Semanal */
+        .calendar-container { background-color: var(--white); margin: 0 20px 15px; border-radius: 20px; padding: 15px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); }
+        .calendar-title { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; text-align: center; text-transform: uppercase; }
+        .days-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .day-bubble { width: 35px; height: 35px; border-radius: 50%; background-color: #e0e0e0; color: #555; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+        .day-bubble.active { background-color: var(--teal-btn); color: var(--white); box-shadow: 0 3px 8px rgba(78, 168, 150, 0.4); transform: scale(1.1); }
+        .daily-tasks h4 { font-size: 13px; color: var(--teal-dark); margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; font-weight: 800;}
+        .add-task-row { display: flex; gap: 8px; margin-bottom: 10px; }
+        .add-task-row input { flex: 1; border: 1px solid #ddd; border-radius: 10px; padding: 8px 10px; font-size: 12px; font-family: 'Nunito', sans-serif; outline: none; }
+        .add-task-row input:focus { border-color: var(--teal-btn); }
+        .add-task-row button { background-color: var(--teal-btn); color: white; border: none; border-radius: 10px; width: 35px; cursor: pointer; transition: 0.2s; }
+        .add-task-row button:active { transform: scale(0.9); }
+        .custom-daily-list li { margin-bottom: 8px; font-size: 12px; align-items: center; color: var(--text-dark); font-weight: 600;}
 
         /* Estilos Playlists e Iconos */
         .playlist-card { background-color: var(--white); margin: 0 20px 15px; border-radius: 15px; padding: 15px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.6); }
@@ -297,6 +314,29 @@
                 <h2 class="tasks-title">ORGANIZADOR<br>DE TAREAS</h2>
             </div>
 
+            <div class="calendar-container">
+                <div class="calendar-title">Mi Semana</div>
+                <div class="days-row" id="calendar-days">
+                    <div class="day-bubble active" data-day="Lunes">L</div>
+                    <div class="day-bubble" data-day="Martes">M</div>
+                    <div class="day-bubble" data-day="Miércoles">X</div>
+                    <div class="day-bubble" data-day="Jueves">J</div>
+                    <div class="day-bubble" data-day="Viernes">V</div>
+                    <div class="day-bubble" data-day="Sábado">S</div>
+                    <div class="day-bubble" data-day="Domingo">D</div>
+                </div>
+                
+                <div class="daily-tasks">
+                    <h4 id="current-day-title">Actividades del Lunes</h4>
+                    <div class="add-task-row">
+                        <input type="text" id="new-task-input" placeholder="Nueva actividad para hoy...">
+                        <button type="button" id="btn-add-task"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <ul id="daily-task-list" class="task-list custom-daily-list">
+                        </ul>
+                </div>
+            </div>
+
             <div class="task-card">
                 <div class="task-card-header">
                     <div class="task-card-title">1. Sector Académico <span class="task-card-subtitle">(Enfoque Universitario)</span></div>
@@ -305,7 +345,7 @@
                 <ul class="task-list">
                     <li><input type="checkbox" checked><span class="task-text"><strong>Lectura Activa:</strong> Completar capítulos o artículos pendientes.</span></li>
                     <li><input type="checkbox"><span class="task-text"><strong>Avance de Tareas:</strong> Redactar ensayos, informes o proyectos.</span></li>
-                    <li><input type="checkbox"><span class="task-text"><strong>Preparación:</strong> Repasar conceptos para exámenes o presentations.</span></li>
+                    <li><input type="checkbox"><span class="task-text"><strong>Preparación:</strong> Repasar conceptos para exámenes o presentaciones.</span></li>
                 </ul>
                 <i class="fa-solid fa-book-open card-icon"></i>
             </div>
@@ -339,7 +379,7 @@
                 <i class="fa-solid fa-gear"></i> Modo de Enfoque
             </div>
 
-            <button class="btn-session">COMENZAR SESIÓN MENTELUZ</button>
+            <button class="btn-session" id="btn-start-tasks-session">COMENZAR SESIÓN MENTELUZ</button>
         </div>
 
         <div id="view-playlists" class="view">
@@ -509,20 +549,21 @@
         const viewTest = document.getElementById('view-test');
         const viewTasks = document.getElementById('view-tasks');
         const viewPlaylists = document.getElementById('view-playlists'); 
-        const viewTechniques = document.getElementById('view-techniques'); // Nueva vista técnicas
+        const viewTechniques = document.getElementById('view-techniques');
         const viewTimer = document.getElementById('view-timer'); 
         
         const btnOpenTest = document.getElementById('btn-open-test');
         const btnOpenTasks = document.getElementById('btn-open-tasks');
         const btnOpenPlaylists = document.getElementById('btn-open-playlists'); 
-        const btnOpenTechniques = document.getElementById('btn-open-techniques'); // Nuevo botón técnicas
+        const btnOpenTechniques = document.getElementById('btn-open-techniques'); 
         const btnsCloseView = document.querySelectorAll('.btn-close-view');
         const navHome = document.getElementById('nav-home');
         const btnResultados = document.getElementById('btn-resultados');
 
         // Variables del temporizador
         const btnStartTimer = document.getElementById('btn-start-timer');
-        const btnStartTechTimer = document.getElementById('btn-start-tech-timer'); // Botón de práctica en técnicas
+        const btnStartTechTimer = document.getElementById('btn-start-tech-timer'); 
+        const btnStartTasksSession = document.getElementById('btn-start-tasks-session');
         const btnCloseTimer = document.getElementById('btn-close-timer');
         const timeDisplay = document.getElementById('time-display');
         const btnPauseTimer = document.getElementById('btn-pause-timer');
@@ -530,7 +571,7 @@
         let countdownInterval;
         let timeLeft = 15 * 60; 
         let isPaused = false;
-        let lastViewBeforeTimer = 'playlists'; // Almacena el historial para el botón de retroceso
+        let lastViewBeforeTimer = 'playlists'; 
 
         // Función para ocultar todas las pantallas
         const hideAllViews = () => {
@@ -563,6 +604,75 @@
             });
         }
 
+        // --- LÓGICA DEL CALENDARIO SEMANAL ---
+        const dailyTasksData = {
+            'Lunes': [{text: 'Revisar apuntes de la universidad', done: false}, {text: 'Avanzar proyecto MenteLuz', done: true}],
+            'Martes': [],
+            'Miércoles': [],
+            'Jueves': [],
+            'Viernes': [],
+            'Sábado': [],
+            'Domingo': []
+        };
+        let currentDay = 'Lunes';
+
+        const dayBubbles = document.querySelectorAll('.day-bubble');
+        const currentDayTitle = document.getElementById('current-day-title');
+        const dailyTaskList = document.getElementById('daily-task-list');
+        const newTaskInput = document.getElementById('new-task-input');
+        const btnAddTask = document.getElementById('btn-add-task');
+
+        function renderDailyTasks() {
+            dailyTaskList.innerHTML = '';
+            currentDayTitle.textContent = 'Actividades del ' + currentDay;
+            
+            if (dailyTasksData[currentDay].length === 0) {
+                dailyTaskList.innerHTML = '<li style="color:#888; justify-content:center;">Día libre. ¡Aprovecha para relajarte!</li>';
+            } else {
+                dailyTasksData[currentDay].forEach((task, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <input type="checkbox" data-index="${index}" ${task.done ? 'checked' : ''}>
+                        <span class="task-text" style="${task.done ? 'text-decoration: line-through; color: #999;' : ''}">${task.text}</span>
+                    `;
+                    dailyTaskList.appendChild(li);
+                });
+            }
+        }
+
+        // Cambiar de día
+        dayBubbles.forEach(bubble => {
+            bubble.addEventListener('click', (e) => {
+                dayBubbles.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentDay = e.target.getAttribute('data-day');
+                renderDailyTasks();
+            });
+        });
+
+        // Agregar nueva tarea al día seleccionado
+        btnAddTask.addEventListener('click', () => {
+            const text = newTaskInput.value.trim();
+            if(text) {
+                dailyTasksData[currentDay].push({text: text, done: false});
+                newTaskInput.value = '';
+                renderDailyTasks();
+            }
+        });
+
+        // Marcar tarea como completada (Delegación de eventos)
+        dailyTaskList.addEventListener('change', (e) => {
+            if(e.target.tagName === 'INPUT' && e.target.type === 'checkbox') {
+                const index = e.target.getAttribute('data-index');
+                dailyTasksData[currentDay][index].done = e.target.checked;
+                renderDailyTasks();
+            }
+        });
+
+        // Inicializar el calendario al cargar
+        renderDailyTasks();
+
+
         // --- LÓGICA DEL TEMPORIZADOR ---
 
         function updateDisplay(seconds) {
@@ -590,7 +700,6 @@
             }, 1000);
         }
 
-        // Trigger del temporizador común
         function triggerTimerActivation() {
             hideAllViews();
             viewTimer.classList.add('active');
@@ -600,17 +709,10 @@
             startTimer();
         }
 
-        // Desde Playlists
-        btnStartTimer.addEventListener('click', () => {
-            lastViewBeforeTimer = 'playlists';
-            triggerTimerActivation();
-        });
-
-        // Desde Técnicas de Relajación
-        btnStartTechTimer.addEventListener('click', () => {
-            lastViewBeforeTimer = 'techniques';
-            triggerTimerActivation();
-        });
+        // Disparadores del temporizador
+        if(btnStartTimer) btnStartTimer.addEventListener('click', () => { lastViewBeforeTimer = 'playlists'; triggerTimerActivation(); });
+        if(btnStartTechTimer) btnStartTechTimer.addEventListener('click', () => { lastViewBeforeTimer = 'techniques'; triggerTimerActivation(); });
+        if(btnStartTasksSession) btnStartTasksSession.addEventListener('click', () => { lastViewBeforeTimer = 'tasks'; triggerTimerActivation(); });
 
         // Botón de Pausa
         btnPauseTimer.addEventListener('click', () => {
@@ -625,6 +727,8 @@
             container.style.backgroundColor = '#dcf0eb';
             if (lastViewBeforeTimer === 'techniques') {
                 viewTechniques.classList.add('active');
+            } else if (lastViewBeforeTimer === 'tasks') {
+                viewTasks.classList.add('active');
             } else {
                 viewPlaylists.classList.add('active');
             }
