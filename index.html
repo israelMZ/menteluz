@@ -114,9 +114,9 @@
         .sub-question { margin-top: 20px; padding-top: 15px; border-top: 1px solid #f0f0f0; }
         .sub-question p { font-size: 13px; color: var(--text-dark); font-weight: 600; margin-bottom: 12px; }
 
-        /* Organizador, Playlists y Cronómetro (Menta) */
-        #view-tasks, #view-playlists, #view-timer { background: linear-gradient(to bottom, #e3f5f1, #bde3dc); }
-        #view-tasks .inner-header, #view-playlists .inner-header, #view-timer .inner-header { color: var(--teal-dark); }
+        /* Organizador, Playlists, Técnicas y Cronómetro (Menta) */
+        #view-tasks, #view-playlists, #view-techniques, #view-timer { background: linear-gradient(to bottom, #e3f5f1, #bde3dc); }
+        #view-tasks .inner-header, #view-playlists .inner-header, #view-techniques .inner-header, #view-timer .inner-header { color: var(--teal-dark); }
         .tasks-header-content { text-align: center; margin-bottom: 20px; color: var(--teal-dark); margin-top: -30px; }
         .tasks-logo { font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 5px; }
         .tasks-title { font-size: 24px; font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; }
@@ -142,7 +142,7 @@
         .btn-session:active { transform: scale(0.98); }
         .btn-pause { background: transparent; border: 2px solid var(--teal-dark); color: var(--teal-dark); box-shadow: none; margin-top: 50px; }
 
-        /* Estilos específicos Playlists */
+        /* Estilos Playlists e Iconos */
         .playlist-card { background-color: var(--white); margin: 0 20px 15px; border-radius: 15px; padding: 15px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.6); }
         .playlist-card:active { transform: scale(0.98); }
         .playlist-info { flex: 1; }
@@ -160,6 +160,9 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.15); background: rgba(78, 168, 150, 0.35); }
         }
+
+        /* Estilos Técnicas de Relajación (Pasos) */
+        .step-number { background-color: var(--teal-btn); color: var(--white); width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
 
     </style>
 </head>
@@ -186,7 +189,7 @@
                         <i class="fa-solid fa-headphones-simple"></i>
                         <p>Playlists para<br>Relajarse</p>
                     </div>
-                    <div class="card">
+                    <div class="card" id="btn-open-techniques">
                         <i class="fa-solid fa-hands-holding-circle"></i>
                         <p>Técnicas de<br>Relajación</p>
                     </div>
@@ -302,7 +305,7 @@
                 <ul class="task-list">
                     <li><input type="checkbox" checked><span class="task-text"><strong>Lectura Activa:</strong> Completar capítulos o artículos pendientes.</span></li>
                     <li><input type="checkbox"><span class="task-text"><strong>Avance de Tareas:</strong> Redactar ensayos, informes o proyectos.</span></li>
-                    <li><input type="checkbox"><span class="task-text"><strong>Preparación:</strong> Repasar conceptos para exámenes o presentaciones.</span></li>
+                    <li><input type="checkbox"><span class="task-text"><strong>Preparación:</strong> Repasar conceptos para exámenes o presentations.</span></li>
                 </ul>
                 <i class="fa-solid fa-book-open card-icon"></i>
             </div>
@@ -336,7 +339,7 @@
                 <i class="fa-solid fa-gear"></i> Modo de Enfoque
             </div>
 
-            <button class="btn-session" id="btn-start-tasks-session">COMENZAR SESIÓN MENTELUZ</button>
+            <button class="btn-session">COMENZAR SESIÓN MENTELUZ</button>
         </div>
 
         <div id="view-playlists" class="view">
@@ -406,6 +409,53 @@
             <button class="btn-session" id="btn-start-timer">COMENZAR SESIÓN DE RELAJACIÓN</button>
         </div>
 
+        <div id="view-techniques" class="view">
+            <div class="inner-header">
+                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
+            
+            <div class="tasks-header-content">
+                <div class="tasks-logo">
+                    <i class="fa-regular fa-lightbulb"></i> MenteLuz
+                </div>
+                <h2 class="tasks-title" style="font-size: 22px;">PASOS PARA<br>RELAJARSE</h2>
+            </div>
+
+            <div class="task-card">
+                <div class="step-number">1</div>
+                <div class="task-card-title" style="margin-bottom: 5px;">Postura Cómoda</div>
+                <p class="task-text">Encuentra un lugar tranquilo. Siéntate con la espalda recta, apoya los pies firmemente en el suelo y descansa tus manos sobre los muslos.</p>
+                <i class="fa-solid fa-chair card-icon"></i>
+            </div>
+
+            <div class="task-card">
+                <div class="step-number">2</div>
+                <div class="task-card-title" style="margin-bottom: 5px;">Respiración Diafragmática</div>
+                <p class="task-text">Inhala profundamente por la nariz llevando el aire al abdomen contando hasta <strong>4</strong>, retén por <strong>4</strong> segundos y exhala lentamente por la boca durante <strong>6</strong> segundos.</p>
+                <i class="fa-solid fa-lungs card-icon"></i>
+            </div>
+
+            <div class="task-card">
+                <div class="step-number">3</div>
+                <div class="task-card-title" style="margin-bottom: 5px;">Escaneo Corporal</div>
+                <p class="task-text">Cierra los ojos y suelta conscientemente la tensión acumulada en tus hombros, libera la presión del cuello y relaja la mandíbula.</p>
+                <i class="fa-solid fa-child card-icon"></i>
+            </div>
+
+            <div class="task-card">
+                <div class="step-number">4</div>
+                <div class="task-card-title" style="margin-bottom: 5px;">Enfoque y Presencia</div>
+                <p class="task-text">Centra tu atención por completo en el ritmo de tu respiración. Si llega un pensamiento sobre tus pendientes, déjalo pasar suavemente como una nube.</p>
+                <i class="fa-solid fa-brain card-icon"></i>
+            </div>
+
+            <div class="focus-mode">
+                <i class="fa-solid fa-gear"></i> Práctica Guiada
+            </div>
+
+            <button class="btn-session" id="btn-start-tech-timer">INICIAR PRÁCTICA (15 MIN)</button>
+        </div>
+
         <div id="view-timer" class="view">
             <div class="inner-header">
                 <button class="btn-back" id="btn-close-timer"><i class="fa-solid fa-arrow-left"></i></button>
@@ -459,40 +509,46 @@
         const viewTest = document.getElementById('view-test');
         const viewTasks = document.getElementById('view-tasks');
         const viewPlaylists = document.getElementById('view-playlists'); 
-        const viewTimer = document.getElementById('view-timer'); // Nueva vista temporizador
+        const viewTechniques = document.getElementById('view-techniques'); // Nueva vista técnicas
+        const viewTimer = document.getElementById('view-timer'); 
         
         const btnOpenTest = document.getElementById('btn-open-test');
         const btnOpenTasks = document.getElementById('btn-open-tasks');
         const btnOpenPlaylists = document.getElementById('btn-open-playlists'); 
+        const btnOpenTechniques = document.getElementById('btn-open-techniques'); // Nuevo botón técnicas
         const btnsCloseView = document.querySelectorAll('.btn-close-view');
         const navHome = document.getElementById('nav-home');
         const btnResultados = document.getElementById('btn-resultados');
 
         // Variables del temporizador
         const btnStartTimer = document.getElementById('btn-start-timer');
+        const btnStartTechTimer = document.getElementById('btn-start-tech-timer'); // Botón de práctica en técnicas
         const btnCloseTimer = document.getElementById('btn-close-timer');
         const timeDisplay = document.getElementById('time-display');
         const btnPauseTimer = document.getElementById('btn-pause-timer');
         
         let countdownInterval;
-        let timeLeft = 15 * 60; // 15 minutos en segundos
+        let timeLeft = 15 * 60; 
         let isPaused = false;
+        let lastViewBeforeTimer = 'playlists'; // Almacena el historial para el botón de retroceso
 
-        // Función para ocultar todas las pantallas y limpiar el cronómetro en segundo plano
+        // Función para ocultar todas las pantallas
         const hideAllViews = () => {
             viewHome.classList.remove('active');
             viewTest.classList.remove('active');
             viewTasks.classList.remove('active');
             viewPlaylists.classList.remove('active');
+            viewTechniques.classList.remove('active');
             viewTimer.classList.remove('active');
             container.style.backgroundColor = 'var(--bg-color)'; 
-            clearInterval(countdownInterval); // Detiene el cronómetro si el usuario se va
+            clearInterval(countdownInterval); 
         };
 
         // Abrir vistas
         btnOpenTest.addEventListener('click', () => { hideAllViews(); viewTest.classList.add('active'); viewTest.scrollTop = 0; });
         btnOpenTasks.addEventListener('click', () => { hideAllViews(); viewTasks.classList.add('active'); container.style.backgroundColor = '#dcf0eb'; viewTasks.scrollTop = 0; });
         btnOpenPlaylists.addEventListener('click', () => { hideAllViews(); viewPlaylists.classList.add('active'); container.style.backgroundColor = '#dcf0eb'; viewPlaylists.scrollTop = 0; });
+        btnOpenTechniques.addEventListener('click', () => { hideAllViews(); viewTechniques.classList.add('active'); container.style.backgroundColor = '#dcf0eb'; viewTechniques.scrollTop = 0; });
 
         // Volver al Inicio
         const goHome = () => { hideAllViews(); viewHome.classList.add('active'); viewHome.scrollTop = 0; };
@@ -534,15 +590,26 @@
             }, 1000);
         }
 
-        // Al hacer clic en Comenzar Sesión
-        btnStartTimer.addEventListener('click', () => {
+        // Trigger del temporizador común
+        function triggerTimerActivation() {
             hideAllViews();
             viewTimer.classList.add('active');
             container.style.backgroundColor = '#dcf0eb';
-            
-            timeLeft = 15 * 60; // Reinicia a 15 min
+            timeLeft = 15 * 60; 
             updateDisplay(timeLeft);
             startTimer();
+        }
+
+        // Desde Playlists
+        btnStartTimer.addEventListener('click', () => {
+            lastViewBeforeTimer = 'playlists';
+            triggerTimerActivation();
+        });
+
+        // Desde Técnicas de Relajación
+        btnStartTechTimer.addEventListener('click', () => {
+            lastViewBeforeTimer = 'techniques';
+            triggerTimerActivation();
         });
 
         // Botón de Pausa
@@ -551,12 +618,16 @@
             btnPauseTimer.textContent = isPaused ? "REANUDAR SESIÓN" : "PAUSAR SESIÓN";
         });
 
-        // Botón de Volver (flecha atrás) en el temporizador
+        // Botón de Volver dinámico en el temporizador
         btnCloseTimer.addEventListener('click', () => {
             clearInterval(countdownInterval);
             hideAllViews();
-            viewPlaylists.classList.add('active'); // Devuelve a las playlists
             container.style.backgroundColor = '#dcf0eb';
+            if (lastViewBeforeTimer === 'techniques') {
+                viewTechniques.classList.add('active');
+            } else {
+                viewPlaylists.classList.add('active');
+            }
         });
 
     </script>
