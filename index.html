@@ -114,9 +114,9 @@
         .sub-question { margin-top: 20px; padding-top: 15px; border-top: 1px solid #f0f0f0; }
         .sub-question p { font-size: 13px; color: var(--text-dark); font-weight: 600; margin-bottom: 12px; }
 
-        /* Organizador de Tareas */
-        #view-tasks { background: linear-gradient(to bottom, #e3f5f1, #bde3dc); }
-        #view-tasks .inner-header { color: var(--teal-dark); }
+        /* Organizador de Tareas y General Tonalidad Menta */
+        #view-tasks, #view-playlists { background: linear-gradient(to bottom, #e3f5f1, #bde3dc); }
+        #view-tasks .inner-header, #view-playlists .inner-header { color: var(--teal-dark); }
         .tasks-header-content { text-align: center; margin-bottom: 20px; color: var(--teal-dark); margin-top: -30px; }
         .tasks-logo { font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 5px; }
         .tasks-title { font-size: 24px; font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; }
@@ -139,6 +139,15 @@
         .focus-mode { text-align: center; font-size: 13px; font-weight: 700; color: var(--teal-dark); margin: 20px 0 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-session { background: linear-gradient(to right, #4ea896, #2d7a6b); color: var(--white); border: none; width: 85%; padding: 16px; border-radius: 30px; font-size: 14px; font-weight: 800; display: block; margin: 0 auto 30px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 5px 15px rgba(45, 122, 107, 0.4); border: 2px solid rgba(255, 255, 255, 0.5); transition: transform 0.2s; }
         .btn-session:active { transform: scale(0.98); }
+
+        /* Estilos específicos Playlists */
+        .playlist-card { background-color: var(--white); margin: 0 20px 15px; border-radius: 15px; padding: 15px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.6); }
+        .playlist-card:active { transform: scale(0.98); }
+        .playlist-info { flex: 1; }
+        .playlist-title { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; text-transform: uppercase; }
+        .playlist-desc { font-size: 11px; color: #555; line-height: 1.3; font-weight: 600; }
+        .playlist-icon { font-size: 26px; color: var(--teal-btn); opacity: 0.8; width: 45px; text-align: center; }
+
     </style>
 </head>
 <body>
@@ -160,7 +169,7 @@
                         <i class="fa-solid fa-heart-circle-bolt"></i>
                         <p>Test de Estrés</p>
                     </div>
-                    <div class="card">
+                    <div class="card" id="btn-open-playlists">
                         <i class="fa-solid fa-headphones-simple"></i>
                         <p>Playlists para<br>Relajarse</p>
                     </div>
@@ -317,6 +326,73 @@
             <button class="btn-session">COMENZAR SESIÓN MENTELUZ</button>
         </div>
 
+        <div id="view-playlists" class="view">
+            <div class="inner-header">
+                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
+            
+            <div class="tasks-header-content">
+                <div class="tasks-logo">
+                    <i class="fa-regular fa-lightbulb"></i> MenteLuz
+                </div>
+                <h2 class="tasks-title" style="font-size: 22px;">PLAYLISTS<br>PARA RELAJARSE</h2>
+            </div>
+
+            <div class="playlist-card">
+                <div class="playlist-info">
+                    <div class="playlist-title">1. Calma Profunda</div>
+                    <div class="playlist-desc">Sonidos suaves y melodías tranquilas que ayudan a reducir el estrés, liberar la tensión emocional y generar paz.</div>
+                </div>
+                <div class="playlist-icon"><i class="fa-solid fa-wind"></i></div>
+            </div>
+
+            <div class="playlist-card">
+                <div class="playlist-info">
+                    <div class="playlist-title">2. Sonidos del Mar</div>
+                    <div class="playlist-desc">Inspirada en el sonido de las olas y la brisa marina, ideal para desconectarse y sentir tranquilidad mental.</div>
+                </div>
+                <div class="playlist-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+            </div>
+
+            <div class="playlist-card">
+                <div class="playlist-info">
+                    <div class="playlist-title">3. Bosque en Calma</div>
+                    <div class="playlist-desc">Sonidos de la naturaleza (aves, viento y agua) diseñada para transmitir serenidad y equilibrio natural.</div>
+                </div>
+                <div class="playlist-icon"><i class="fa-solid fa-tree"></i></div>
+            </div>
+
+            <div class="playlist-card">
+                <div class="playlist-info">
+                    <div class="playlist-title">4. Noche de Paz</div>
+                    <div class="playlist-desc">Melodías suaves que ayudan a descansar mejor, calmar la mente y crear un ambiente perfecto para dormir.</div>
+                </div>
+                <div class="playlist-icon"><i class="fa-solid fa-moon"></i></div>
+            </div>
+
+            <div class="playlist-card">
+                <div class="playlist-info">
+                    <div class="playlist-title">5. Música Instrumental</div>
+                    <div class="playlist-desc">Melodías que favorecen la concentración, la calma y un ambiente armonioso para estudiar o descansar.</div>
+                </div>
+                <div class="playlist-icon"><i class="fa-solid fa-music"></i></div>
+            </div>
+
+            <div class="playlist-card">
+                <div class="playlist-info">
+                    <div class="playlist-title">6. Relajación Guiada</div>
+                    <div class="playlist-desc">Acompañamiento para momentos de respiración, ayudando a sentirse más tranquilo y emocionalmente equilibrado.</div>
+                </div>
+                <div class="playlist-icon"><i class="fa-solid fa-spa"></i></div>
+            </div>
+
+            <div class="focus-mode">
+                <i class="fa-solid fa-gear"></i> Modo de Enfoque
+            </div>
+
+            <button class="btn-session">COMENZAR SESIÓN DE RELAJACIÓN</button>
+        </div>
+
         <nav class="bottom-nav">
             <a href="#" class="nav-item active" id="nav-home">
                 <i class="fa-solid fa-house"></i>
@@ -347,9 +423,11 @@
         const viewHome = document.getElementById('view-home');
         const viewTest = document.getElementById('view-test');
         const viewTasks = document.getElementById('view-tasks');
+        const viewPlaylists = document.getElementById('view-playlists'); // Nueva vista
         
         const btnOpenTest = document.getElementById('btn-open-test');
         const btnOpenTasks = document.getElementById('btn-open-tasks');
+        const btnOpenPlaylists = document.getElementById('btn-open-playlists'); // Nuevo botón
         const btnsCloseView = document.querySelectorAll('.btn-close-view');
         const navHome = document.getElementById('nav-home');
         const btnResultados = document.getElementById('btn-resultados');
@@ -359,6 +437,7 @@
             viewHome.classList.remove('active');
             viewTest.classList.remove('active');
             viewTasks.classList.remove('active');
+            viewPlaylists.classList.remove('active');
             container.style.backgroundColor = 'var(--bg-color)'; 
         };
 
@@ -375,6 +454,14 @@
             viewTasks.classList.add('active');
             container.style.backgroundColor = '#dcf0eb'; 
             viewTasks.scrollTop = 0;
+        });
+
+        // Abrir Playlists para Relajarse
+        btnOpenPlaylists.addEventListener('click', () => {
+            hideAllViews();
+            viewPlaylists.classList.add('active');
+            container.style.backgroundColor = '#dcf0eb'; 
+            viewPlaylists.scrollTop = 0;
         });
 
         // Volver al Inicio
