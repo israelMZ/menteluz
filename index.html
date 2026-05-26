@@ -6,389 +6,52 @@
     <title>MenteLuz - Web App</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root {
-            --bg-color: #FAEEE0;
-            --text-dark: #1F2A38;
-            --gold-light: #E4C092;
-            --gold-dark: #B98B58;
-            --white: #FFFFFF;
-            --mint-bg: #dcf0eb;
-            --teal-dark: #1e4640;
-            --teal-btn: #4ea896;
-            --teal-light: #a8d5cc;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Nunito', sans-serif;
-        }
-
-        body {
-            background-color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Contenedor Principal (Fijo) */
-        .app-container {
-            width: 100%;
-            max-width: 400px;
-            height: 850px;
-            max-height: 100vh;
-            background-color: var(--bg-color);
-            position: relative;
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border-radius: 40px;
-            border: 8px solid #333;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Vistas Internas (Controlan el Scroll) */
-        .view {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
-            padding-bottom: 120px; 
-            height: 100%;
-            overflow-y: auto; 
-            overflow-x: hidden;
-        }
-        
-        .view.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Cabecera y Botones */
+        :root { --bg-color: #FAEEE0; --text-dark: #1F2A38; --gold-light: #E4C092; --gold-dark: #B98B58; --white: #FFFFFF; --mint-bg: #dcf0eb; --teal-dark: #1e4640; --teal-btn: #4ea896; --teal-light: #a8d5cc; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+        body { background-color: #e0e0e0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .app-container { width: 100%; max-width: 400px; height: 850px; max-height: 100vh; background-color: var(--bg-color); position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border-radius: 40px; border: 8px solid #333; }
+        .view { display: none; padding-bottom: 120px; height: 100%; overflow-y: auto; }
+        .view.active { display: block; }
         .header { text-align: center; padding: 40px 20px 20px; }
-        .logo { font-family: 'Cinzel', serif; font-size: 28px; color: var(--text-dark); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .logo i { color: var(--gold-dark); font-size: 20px; }
-        .subtitle { color: var(--text-dark); font-size: 16px; margin-bottom: 25px; line-height: 1.4; }
-        .btn-main { background: linear-gradient(to right, var(--gold-light), var(--gold-dark)); color: var(--white); border: none; width: 90%; padding: 15px; border-radius: 30px; font-size: 14px; font-weight: 700; letter-spacing: 1px; cursor: pointer; box-shadow: 0 4px 10px rgba(185, 139, 88, 0.4); margin-bottom: 30px; display: block; margin-left: auto; margin-right: auto; transition: transform 0.2s;}
-        .btn-main:active { transform: scale(0.98); }
-
-        /* Cuadrícula de opciones */
-        .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; margin-bottom: 15px; }
-        .card { background-color: var(--white); border-radius: 20px; padding: 20px 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
-        .card:active { transform: scale(0.95); }
-        .card i { font-size: 30px; color: var(--gold-dark); margin-bottom: 10px; }
-        .card p { font-size: 12px; color: var(--text-dark); font-weight: 600; }
-        .wide-card { background-color: var(--white); margin: 0 20px 20px; border-radius: 20px; padding: 15px 20px; display: flex; align-items: center; justify-content: center; gap: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
-        .wide-card:active { transform: scale(0.98); }
-        .wide-card i { font-size: 28px; color: var(--gold-dark); }
-        .wide-card p { font-size: 13px; color: var(--text-dark); font-weight: 600; text-align: left; }
-
-        /* Navegación Inferior Fija */
-        .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: flex-end; padding: 10px 20px 20px; border-top-left-radius: 30px; border-top-right-radius: 30px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 999; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 10px; cursor: pointer; text-decoration: none; width: 50px; }
-        .nav-item i { font-size: 18px; margin-bottom: 5px; }
+        .btn-main { background: linear-gradient(to right, var(--gold-light), var(--gold-dark)); color: var(--white); border: none; width: 90%; padding: 15px; border-radius: 30px; font-weight: 700; cursor: pointer; display: block; margin: 0 auto 30px; }
+        .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; }
+        .card { background: var(--white); border-radius: 20px; padding: 20px; text-align: center; cursor: pointer; }
+        .bottom-nav { position: absolute; bottom: 0; width: 100%; background: rgba(255, 255, 255, 0.95); display: flex; justify-content: space-around; padding: 15px; z-index: 999; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; color: #888; text-decoration: none; font-size: 10px; }
         .nav-item.active { color: var(--gold-dark); }
-        .nav-center { position: relative; top: -20px; }
-        .nav-center .circle { background: linear-gradient(to bottom right, var(--gold-light), var(--gold-dark)); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(185, 139, 88, 0.5); border: 4px solid var(--white); }
-        .nav-center i { color: var(--white); font-size: 24px; margin: 0; }
-
-        /* Cabeceras Interiores */
-        .inner-header { padding: 30px 20px 10px; display: flex; align-items: center; gap: 15px; }
-        .btn-back { background: none; border: none; font-size: 18px; color: inherit; cursor: pointer; z-index: 2; position: relative;}
-        
-        /* Test de Estrés */
-        #view-test { background-color: var(--bg-color); }
-        .test-title { font-family: 'Cinzel', serif; font-size: 20px; color: var(--text-dark); }
-        .test-subtitle { text-align: center; font-size: 13px; color: var(--gold-dark); font-weight: 700; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
-        .question-box { background: var(--white); margin: 0 20px 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .question-text { font-size: 14px; color: var(--text-dark); font-weight: 600; margin-bottom: 15px; line-height: 1.5; }
-        .options-group { display: flex; gap: 20px; justify-content: center; }
-        .radio-label { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
-        .scale-group { display: flex; justify-content: space-between; margin-top: 10px; }
-        .scale-item { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; font-weight: bold; color: #555; }
-        .scale-item input { width: 18px; height: 18px; accent-color: var(--gold-dark); }
-        .sub-question { margin-top: 20px; padding-top: 15px; border-top: 1px solid #f0f0f0; }
-        .sub-question p { font-size: 13px; color: var(--text-dark); font-weight: 600; margin-bottom: 12px; }
-
-        /* Vistas Menta */
-        #view-tasks, #view-playlists, #view-techniques, #view-timer, #view-schedule { background: linear-gradient(to bottom, #e3f5f1, #bde3dc); }
-        #view-tasks .inner-header, #view-playlists .inner-header, #view-techniques .inner-header, #view-timer .inner-header, #view-schedule .inner-header { color: var(--teal-dark); }
-        .tasks-header-content { text-align: center; margin-bottom: 20px; color: var(--teal-dark); margin-top: -30px; }
-        .tasks-logo { font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 5px; }
-        .tasks-title { font-size: 24px; font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; text-transform: uppercase; }
-        
-        /* Tarjetas */
-        .task-card { background-color: var(--white); margin: 0 20px 15px; border-radius: 20px; padding: 15px 18px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); position: relative; overflow: hidden; }
-        .task-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .task-card-title { font-size: 15px; font-weight: 800; color: var(--text-dark); }
-        .task-card-subtitle { font-size: 12px; font-weight: 600; color: #666; display: block; margin-top: 2px; }
-        .progress-pill { width: 45px; height: 12px; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; display: flex; }
-        .progress-pill .fill { height: 100%; background-color: var(--teal-btn); width: 30%; }
-        .progress-pill .fill-2 { width: 60%; background-color: var(--teal-btn); }
-        .progress-pill .fill-3 { width: 100%; background-color: var(--teal-btn); }
-        
-        /* Listas y Checkboxes */
-        .task-list { list-style: none; }
-        .task-list li { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
-        .task-list input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 2px solid var(--teal-light); border-radius: 50%; outline: none; cursor: pointer; position: relative; flex-shrink: 0; margin-top: 2px; background-color: var(--white); }
-        .task-list input[type="checkbox"]:checked { background-color: var(--teal-btn); border-color: var(--teal-btn); }
-        .task-list input[type="checkbox"]:checked::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 12px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        .task-text { font-size: 12px; color: var(--text-dark); line-height: 1.3; }
-        .task-text strong { font-weight: 800; }
-        .card-icon { position: absolute; bottom: 15px; right: 15px; font-size: 35px; color: var(--teal-light); opacity: 0.6; }
-        .focus-mode { text-align: center; font-size: 13px; font-weight: 700; color: var(--teal-dark); margin: 20px 0 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        
-        /* Botones de Acción */
-        .btn-session { background: linear-gradient(to right, #4ea896, #2d7a6b); color: var(--white); border: none; width: 85%; padding: 16px; border-radius: 30px; font-size: 14px; font-weight: 800; display: block; margin: 0 auto 30px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 5px 15px rgba(45, 122, 107, 0.4); border: 2px solid rgba(255, 255, 255, 0.5); transition: transform 0.2s; }
-        .btn-session:active { transform: scale(0.98); }
-        .btn-pause { background: transparent; border: 2px solid var(--teal-dark); color: var(--teal-dark); box-shadow: none; margin-top: 50px; }
-
-        /* Estilos Calendario Semanal */
-        .calendar-container { background-color: var(--white); margin: 0 20px 15px; border-radius: 20px; padding: 15px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); }
-        .calendar-title { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; text-align: center; text-transform: uppercase; }
-        .days-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
-        .day-bubble { width: 35px; height: 35px; border-radius: 50%; background-color: #e0e0e0; color: #555; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; cursor: pointer; transition: 0.2s; }
-        .day-bubble.active { background-color: var(--teal-btn); color: var(--white); box-shadow: 0 3px 8px rgba(78, 168, 150, 0.4); transform: scale(1.1); }
-        .daily-tasks h4 { font-size: 13px; color: var(--teal-dark); margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; font-weight: 800;}
-        .add-task-row { display: flex; gap: 8px; margin-bottom: 10px; }
-        .add-task-row input { flex: 1; border: 1px solid #ddd; border-radius: 10px; padding: 8px 10px; font-size: 12px; font-family: 'Nunito', sans-serif; outline: none; }
-        .add-task-row input:focus { border-color: var(--teal-btn); }
-        .add-task-row button { background-color: var(--teal-btn); color: white; border: none; border-radius: 10px; width: 35px; cursor: pointer; transition: 0.2s; }
-        .add-task-row button:active { transform: scale(0.9); }
-        .custom-daily-list li { margin-bottom: 8px; font-size: 12px; align-items: center; color: var(--text-dark); font-weight: 600;}
-
-        /* Estilos Playlists e Iconos */
-        .playlist-card { background-color: var(--white); margin: 0 20px 15px; border-radius: 15px; padding: 15px; box-shadow: 0 4px 15px rgba(30, 70, 64, 0.08); display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.6); }
-        .playlist-card:active { transform: scale(0.98); }
-        .playlist-info { flex: 1; }
-        .playlist-title { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; text-transform: uppercase; }
-        .playlist-desc { font-size: 11px; color: #555; line-height: 1.3; font-weight: 600; }
-        .playlist-icon { font-size: 26px; color: var(--teal-btn); opacity: 0.8; width: 45px; text-align: center; }
-
-        /* Estilos Programar Alarma */
-        .schedule-input-group { display: flex; flex-direction: column; gap: 15px; margin-top: 10px; }
-        .schedule-input-group label { font-size: 13px; font-weight: 800; color: var(--teal-dark); }
-        .schedule-input-group input { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #d0d0d0; font-family: 'Nunito', sans-serif; font-size: 14px; color: var(--text-dark); background-color: #f9f9f9; outline: none; margin-top: 5px; transition: border-color 0.2s; }
-        .schedule-input-group input:focus { border-color: var(--teal-btn); background-color: var(--white); }
-        .confirmation-card { display: none; margin: 20px; text-align: center; color: var(--teal-dark); background: rgba(255,255,255,0.9); padding: 20px; border-radius: 20px; font-weight: 700; font-size: 14px; box-shadow: 0 5px 15px rgba(30, 70, 64, 0.1); border: 2px solid var(--teal-btn); animation: fadeIn 0.4s ease-in-out;}
-        .confirmation-card i { color: var(--gold-dark); font-size: 28px; margin-bottom: 10px; display: block; }
-
-        /* Estilos Temporizador / Respiración */
-        .timer-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
-        .breathing-circle { width: 220px; height: 220px; border-radius: 50%; background: rgba(78, 168, 150, 0.2); display: flex; justify-content: center; align-items: center; position: relative; animation: breathe 8s infinite ease-in-out; border: 2px solid rgba(78, 168, 150, 0.4); }
-        .timer-display { font-size: 55px; font-weight: 800; color: var(--teal-dark); font-family: 'Nunito', sans-serif; text-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .breathing-text { color: var(--teal-dark); font-weight: 700; font-size: 16px; margin-top: 30px; letter-spacing: 1px; }
-
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); background: rgba(78, 168, 150, 0.35); }
-        }
-
-        /* Estilos Técnicas de Relajación (Pasos) */
-        .step-number { background-color: var(--teal-btn); color: var(--white); width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
-
+        .nav-center .circle { background: var(--gold-dark); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; margin-top: -30px; }
     </style>
 </head>
 <body>
-
     <div class="app-container" id="main-container">
-        
         <div id="view-home" class="view active">
             <header class="header">
-                <div class="logo">
-                    MENTELUZ <i class="fa-solid fa-fire-flame-simple"></i>
-                </div>
-                <p class="subtitle">Bienvenido a MenteLuz.<br>Escanea para conectar.</p>
+                <h1>MENTELUZ</h1>
                 <button class="btn-main">INICIAR SESIÓN</button>
             </header>
-
             <main>
                 <div class="grid-menu">
-                    <div class="card" id="btn-open-test">
-                        <i class="fa-solid fa-heart-circle-bolt"></i>
-                        <p>Test de Estrés</p>
-                    </div>
-                    <div class="card" id="btn-open-playlists">
-                        <i class="fa-solid fa-headphones-simple"></i>
-                        <p>Playlists para<br>Relajarse</p>
-                    </div>
-                    <div class="card" id="btn-open-techniques">
-                        <i class="fa-solid fa-hands-holding-circle"></i>
-                        <p>Técnicas de<br>Relajación</p>
-                    </div>
-                    <div class="card" id="btn-open-tasks">
-                        <i class="fa-solid fa-clipboard-list"></i>
-                        <p>Organizador de<br>Tareas (Lab. y Univ.)</p>
-                    </div>
-                </div>
-
-                <div class="wide-card" id="btn-open-schedule">
-                    <i class="fa-solid fa-clock"></i>
-                    <p>Hora de Relajarse<br>(Programar)</p>
+                    <div class="card" id="btn-open-test"><p>Test Estrés</p></div>
+                    <div class="card" id="btn-open-playlists"><p>Playlists</p></div>
+                    <div class="card" id="btn-open-techniques"><p>Técnicas</p></div>
+                    <div class="card" id="btn-open-tasks"><p>Tareas</p></div>
                 </div>
             </main>
         </div>
-
-        <div id="view-test" class="view">
-            <div class="inner-header">
-                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
-                <h2 class="test-title">Evalúa tu Nivel</h2>
-            </div>
-            <p class="test-subtitle">Inventario SISCO del estrés académico</p>
-
-            <form>
-                <div class="question-box">
-                    <p class="question-text">1. Durante el transcurso de este semestre ¿has tenido momentos de preocupación o nerviosismo?</p>
-                    <div class="options-group">
-                        <label class="radio-label"><input type="radio" name="q1" value="si"> Sí</label>
-                        <label class="radio-label"><input type="radio" name="q1" value="no"> No</label>
-                    </div>
-                </div>
-                
-                <div class="question-box">
-                    <p class="question-text">2. Con la idea de obtener mayor precisión y utilizando una escala del 1 al 5, señala tu nivel de preocupación o nerviosismo donde (1) es poco y (5) mucho.</p>
-                    <div class="scale-group">
-                        <label class="scale-item">1 <input type="radio" name="q2" value="1"></label>
-                        <label class="scale-item">2 <input type="radio" name="q2" value="2"></label>
-                        <label class="scale-item">3 <input type="radio" name="q2" value="3"></label>
-                        <label class="scale-item">4 <input type="radio" name="q2" value="4"></label>
-                        <label class="scale-item">5 <input type="radio" name="q2" value="5"></label>
-                    </div>
-                </div>
-
-                <div class="question-box">
-                    <p class="question-text">3. En una escala del (1) nunca al (5) siempre, señala con qué frecuencia te inquietaron las siguientes situaciones:</p>
-                    
-                    <div class="sub-question">
-                        <p>a. Sobrecarga de tareas y trabajos universitarios</p>
-                        <div class="scale-group">
-                            <label class="scale-item">1 <input type="radio" name="q3a" value="1"></label>
-                            <label class="scale-item">2 <input type="radio" name="q3a" value="2"></label>
-                            <label class="scale-item">3 <input type="radio" name="q3a" value="3"></label>
-                            <label class="scale-item">4 <input type="radio" name="q3a" value="4"></label>
-                            <label class="scale-item">5 <input type="radio" name="q3a" value="5"></label>
-                        </div>
-                    </div>
-
-                    <div class="sub-question">
-                        <p>b. Evaluaciones de los profesores (exámenes, proyectos)</p>
-                        <div class="scale-group">
-                            <label class="scale-item">1 <input type="radio" name="q3b" value="1"></label>
-                            <label class="scale-item">2 <input type="radio" name="q3b" value="2"></label>
-                            <label class="scale-item">3 <input type="radio" name="q3b" value="3"></label>
-                            <label class="scale-item">4 <input type="radio" name="q3b" value="4"></label>
-                            <label class="scale-item">5 <input type="radio" name="q3b" value="5"></label>
-                        </div>
-                    </div>
-
-                    <div class="sub-question">
-                        <p>c. Tiempo limitado para hacer los entregables</p>
-                        <div class="scale-group">
-                            <label class="scale-item">1 <input type="radio" name="q3c" value="1"></label>
-                            <label class="scale-item">2 <input type="radio" name="q3c" value="2"></label>
-                            <label class="scale-item">3 <input type="radio" name="q3c" value="3"></label>
-                            <label class="scale-item">4 <input type="radio" name="q3c" value="4"></label>
-                            <label class="scale-item">5 <input type="radio" name="q3c" value="5"></label>
-                        </div>
-                    </div>
-
-                    <div class="sub-question">
-                        <p>d. No entender los temas que se abordan en la clase</p>
-                        <div class="scale-group">
-                            <label class="scale-item">1 <input type="radio" name="q3d" value="1"></label>
-                            <label class="scale-item">2 <input type="radio" name="q3d" value="2"></label>
-                            <label class="scale-item">3 <input type="radio" name="q3d" value="3"></label>
-                            <label class="scale-item">4 <input type="radio" name="q3d" value="4"></label>
-                            <label class="scale-item">5 <input type="radio" name="q3d" value="5"></label>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="button" class="btn-main" id="btn-resultados" style="margin-top: 10px; width: 85%;">VER RESULTADOS</button>
-            </form>
-        </div>
-
-        <div id="view-tasks" class="view">
-            <div class="inner-header">
-                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
-            </div>
-            
-            <div class="tasks-header-content">
-                <div class="tasks-logo">
-                    <i class="fa-regular fa-lightbulb"></i> MenteLuz
-                </div>
-                <h2 class="tasks-title">ORGANIZADOR<br>DE TAREAS</h2>
-            </div>
-
-            <div class="calendar-container">
-                <div class="calendar-title">Mi Semana</div>
-                <div class="days-row" id="calendar-days">
-                    <div class="day-bubble active" data-day="Lunes">L</div>
-                    <div class="day-bubble" data-day="Martes">M</div>
-                    <div class="day-bubble" data-day="Miércoles">X</div>
-                    <div class="day-bubble" data-day="Jueves">J</div>
-                    <div class="day-bubble" data-day="Viernes">V</div>
-                    <div class="day-bubble" data-day="Sábado">S</div>
-                    <div class="day-bubble" data-day="Domingo">D</div>
-                </div>
-                
-                <div class="daily-tasks">
-                    <h4 id="current-day-title">Actividades del Lunes</h4>
-                    <div class="add-task-row">
-                        <input type="text" id="new-task-input" placeholder="Nueva actividad para hoy...">
-                        <button type="button" id="btn-add-task"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-                    <ul id="daily-task-list" class="task-list custom-daily-list">
-                    </ul>
-                </div>
-            </div>
-
-            <div class="task-card">
-                <div class="task-card-header">
-                    <div class="task-card-title">1. Sector Académico <span class="task-card-subtitle">(Enfoque Universitario)</span></div>
-                    <div class="progress-pill"><div class="fill"></div></div>
-                </div>
-                <ul class="task-list">
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Lectura Activa:</strong> Completar capítulos o artículos pendientes.</span></li>
-                    <li><input type="checkbox"><span class="task-text"><strong>Avance de Tareas:</strong> Redactar ensayos, informes o proyectos.</span></li>
-                    <li><input type="checkbox"><span class="task-text"><strong>Preparación:</strong> Repasar conceptos para exámenes o presentaciones.</span></li>
-                </ul>
-                <i class="fa-solid fa-book-open card-icon"></i>
-            </div>
-
-            <div class="task-card">
-                <div class="task-card-header">
-                    <div class="task-card-title">2. Sector Laboral <span class="task-card-subtitle">(Productividad Consciente)</span></div>
-                    <div class="progress-pill"><div class="fill fill-2"></div></div>
-                </div>
-                <ul class="task-list">
-                    <li><input type="checkbox"><span class="task-text"><strong>Gestión:</strong> Responder correos y mensajes prioritarios del día.</span></li>
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Ejecución:</strong> Avanzar en los entregables clave del puesto.</span></li>
-                    <li><input type="checkbox"><span class="task-text"><strong>Planificación:</strong> Organizar la agenda y metas para el día siguiente.</span></li>
-                </ul>
-                <i class="fa-solid fa-chart-column card-icon"></i>
-            </div>
-
-            <div class="task-card">
-                <div class="task-card-header">
-                    <div class="task-card-title">3. Ritual MenteLuz <span class="task-card-subtitle">(Conexión con la Vela)</span></div>
-                </div>
-                <ul class="task-list">
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Activación:</strong> Encender la vela y elegir una playlist de la aplicación.</span></li>
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Reseteo:</strong> Hacer una pausa de 3 minutos de respiración profunda.</span></li>
-                    <li><input type="checkbox" checked><span class="task-text"><strong>Cierre:</strong> Apagar la vela y marcar los logros alcanzados en el día.</span></li>
-                </ul>
-                <i class="fa-solid fa-fire-flame-curved card-icon"></i>
-            </div>
-
-            <div class="focus-mode">
-                <i class="fa-solid fa-gear"></i> Modo de Enfoque
-            </div>
-
-            <button class="btn-session" id="btn-start-tasks-session">COMENZAR SESIÓN MENTELUZ</button>
-        </div>
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active" id="nav-home"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+            <a href="#" class="nav-item"><i class="fa-regular fa-user"></i><span>Perfil</span></a>
+            <div class="nav-item nav-center"><div class="circle"><i class="fa-solid fa-spa"></i></div></div>
+            <a href="#" class="nav-item"><i class="fa-solid fa-om"></i><span>Meditación</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i><span>Ajustes</span></a>
+        </nav>
+    </div>
+    <script>
+        // Lógica para cambiar de vistas
+        const hideAll = () => document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById('btn-open-tasks').addEventListener('click', () => { hideAll(); document.getElementById('view-tasks').classList.add('active'); });
+        document.getElementById('nav-home').addEventListener('click', () => { hideAll(); document.getElementById('view-home').classList.add('active'); });
+    </script>
+</body>
+</html>
