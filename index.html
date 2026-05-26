@@ -80,16 +80,19 @@
         .card i { font-size: 30px; color: var(--gold-dark); margin-bottom: 10px; }
         .card p { font-size: 12px; color: var(--text-dark); font-weight: 600; }
         
-        /* WIDE CARD MODIFICADA PARA EL FORMULARIO */
-        .wide-card { background-color: var(--white); margin: 0 20px 20px; border-radius: 20px; padding: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; }
-        .schedule-form { display: none; margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee; }
-        .schedule-form input { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 10px; }
+        .wide-card { background-color: var(--white); margin: 0 20px 20px; border-radius: 20px; padding: 15px 20px; display: flex; align-items: center; justify-content: center; gap: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; }
+        .wide-card i { font-size: 28px; color: var(--gold-dark); }
+        .wide-card p { font-size: 13px; color: var(--text-dark); font-weight: 600; text-align: left; }
+        
+        /* ESTILO FORMULARIO HORA */
+        .schedule-form { display: none; width: 100%; margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee; }
+        .schedule-form input { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ddd; border-radius: 10px; }
 
         .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: flex-end; padding: 10px 20px 20px; border-top-left-radius: 30px; border-top-right-radius: 30px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 999; }
         .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 10px; cursor: pointer; text-decoration: none; width: 50px; }
         .nav-item i { font-size: 18px; margin-bottom: 5px; }
         .nav-item.active { color: var(--gold-dark); }
-        .nav-center { position: relative; top: -20px; }
+        .nav-center { position: relative; top: -20px; cursor: pointer; }
         .nav-center .circle { background: linear-gradient(to bottom right, var(--gold-light), var(--gold-dark)); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(185, 139, 88, 0.5); border: 4px solid var(--white); }
         .nav-center i { color: var(--white); font-size: 24px; margin: 0; }
 
@@ -159,6 +162,9 @@
         @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); background: rgba(78, 168, 150, 0.35); } }
         .step-number { background-color: var(--teal-btn); color: var(--white); width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
 
+        /* NUEVOS ESTILOS VELAS */
+        #view-velas { background: var(--bg-color); }
+        .candle-info { background: white; margin: 20px; padding: 20px; border-radius: 20px; text-align: center; }
     </style>
 </head>
 <body>
@@ -194,18 +200,28 @@
                     </div>
                 </div>
 
-                <div class="wide-card" id="btn-toggle-schedule" style="cursor: pointer;">
+                <div class="wide-card" id="btn-toggle-schedule">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <i class="fa-solid fa-clock"></i>
                         <p>Hora de Relajarse<br>(Programar)</p>
                     </div>
-                    <div id="schedule-form" class="schedule-form">
+                    <div id="schedule-form" class="schedule-form" onclick="event.stopPropagation()">
                         <input type="date">
                         <input type="time">
-                        <button class="btn-main" style="width: 100%; margin: 5px 0 0 0;" onclick="event.stopPropagation(); alert('Hora guardada')">GUARDAR HORA</button>
+                        <button class="btn-main" style="width: 100%; margin: 5px 0 0 0;" onclick="alert('Hora guardada')">GUARDAR HORA</button>
                     </div>
                 </div>
             </main>
+        </div>
+
+        <div id="view-velas" class="view">
+            <div class="inner-header">
+                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2>Nuestras Velas</h2>
+            </div>
+            <div class="candle-info"><h3>Vela Lavanda</h3><p>Relajación total.</p></div>
+            <div class="candle-info"><h3>Vela Eucalipto</h3><p>Energía fresca.</p></div>
+            <div class="candle-info"><h3>Vela Vainilla</h3><p>Calidez absoluta.</p></div>
         </div>
 
         <div id="view-test" class="view">
@@ -476,7 +492,7 @@
                 <i class="fa-regular fa-user"></i>
                 <span>Perfil</span>
             </a>
-            <div class="nav-item nav-center">
+            <div class="nav-item nav-center" id="btn-open-velas">
                 <div class="circle">
                     <i class="fa-solid fa-spa"></i>
                 </div>
@@ -500,11 +516,17 @@
         const viewPlaylists = document.getElementById('view-playlists'); 
         const viewTechniques = document.getElementById('view-techniques');
         const viewTimer = document.getElementById('view-timer'); 
+        const viewVelas = document.createElement('div'); // Contenedor dinámico
+        viewVelas.id = 'view-velas';
+        viewVelas.className = 'view';
+        viewVelas.innerHTML = `<div class="inner-header"><button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button><h2>Nuestras Velas</h2></div><div style="padding:20px;"><div class="task-card"><h3>Lavanda Pura</h3><p>Relajación total.</p></div><div class="task-card"><h3>Eucalipto Fresh</h3><p>Energía y foco.</p></div><div class="task-card"><h3>Vainilla Gold</h3><p>Calidez dulce.</p></div></div>`;
+        document.querySelector('.app-container').insertBefore(viewVelas, document.querySelector('.bottom-nav'));
         
         const btnOpenTest = document.getElementById('btn-open-test');
         const btnOpenTasks = document.getElementById('btn-open-tasks');
         const btnOpenPlaylists = document.getElementById('btn-open-playlists'); 
         const btnOpenTechniques = document.getElementById('btn-open-techniques'); 
+        const btnOpenVelas = document.getElementById('btn-open-velas');
         const btnsCloseView = document.querySelectorAll('.btn-close-view');
         const navHome = document.getElementById('nav-home');
         const btnResultados = document.getElementById('btn-resultados');
@@ -528,6 +550,7 @@
             viewPlaylists.classList.remove('active');
             viewTechniques.classList.remove('active');
             viewTimer.classList.remove('active');
+            viewVelas.classList.remove('active');
             container.style.backgroundColor = 'var(--bg-color)'; 
             clearInterval(countdownInterval); 
         };
@@ -536,6 +559,7 @@
         btnOpenTasks.addEventListener('click', () => { hideAllViews(); viewTasks.classList.add('active'); container.style.backgroundColor = '#dcf0eb'; viewTasks.scrollTop = 0; });
         btnOpenPlaylists.addEventListener('click', () => { hideAllViews(); viewPlaylists.classList.add('active'); container.style.backgroundColor = '#dcf0eb'; viewPlaylists.scrollTop = 0; });
         btnOpenTechniques.addEventListener('click', () => { hideAllViews(); viewTechniques.classList.add('active'); container.style.backgroundColor = '#dcf0eb'; viewTechniques.scrollTop = 0; });
+        btnOpenVelas.addEventListener('click', () => { hideAllViews(); viewVelas.classList.add('active'); viewVelas.scrollTop = 0; });
 
         const goHome = () => { hideAllViews(); viewHome.classList.add('active'); viewHome.scrollTop = 0; };
         btnsCloseView.forEach(btn => { btn.addEventListener('click', goHome); });
@@ -550,12 +574,7 @@
 
         const dailyTasksData = {
             'Lunes': [{text: 'Revisar apuntes de la universidad', done: false}, {text: 'Avanzar proyecto MenteLuz', done: true}],
-            'Martes': [],
-            'Miércoles': [],
-            'Jueves': [],
-            'Viernes': [],
-            'Sábado': [],
-            'Domingo': []
+            'Martes': [], 'Miércoles': [], 'Jueves': [], 'Viernes': [], 'Sábado': [], 'Domingo': []
         };
         let currentDay = 'Lunes';
         const dayBubbles = document.querySelectorAll('.day-bubble');
@@ -643,7 +662,6 @@
             else { viewPlaylists.classList.add('active'); }
         });
         
-        // --- AQUÍ LA FUNCIONALIDAD DE HORA ---
         const btnToggle = document.getElementById('btn-toggle-schedule');
         const form = document.getElementById('schedule-form');
         btnToggle.addEventListener('click', (e) => {
