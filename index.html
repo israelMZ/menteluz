@@ -2,12 +2,36 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>MenteLuz - Prueba</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MenteLuz - Web App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --bg-color: #FAEEE0; --text-dark: #1F2A38; --gold-dark: #B98B58; --white: #FFFFFF; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+        body { background-color: #e0e0e0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .app-container { width: 100%; max-width: 400px; height: 850px; background-color: var(--bg-color); position: relative; border-radius: 40px; border: 8px solid #333; overflow: hidden; }
+        .header { text-align: center; padding: 40px 20px; }
+        .logo { font-family: 'Cinzel', serif; font-size: 28px; color: var(--text-dark); margin-bottom: 20px; }
+        .btn-main { background: linear-gradient(to right, #E4C092, var(--gold-dark)); color: white; border: none; width: 90%; padding: 15px; border-radius: 30px; font-weight: 700; margin-bottom: 30px; cursor: pointer; }
+        .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; }
+        .card { background: var(--white); border-radius: 20px; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .wide-card { background: var(--white); margin: 20px; border-radius: 20px; padding: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    </style>
 </head>
-<body style="background-color: #FAEEE0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif;">
-    <div style="background: white; padding: 50px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-        <h1 style="color: #B98B58;">MENTELUZ</h1>
-        <p>¡La aplicación está cargando correctamente!</p>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">MENTELUZ <i class="fa-solid fa-fire-flame-simple"></i></div>
+            <button class="btn-main">INICIAR SESIÓN</button>
+        </header>
+        <div class="grid-menu">
+            <div class="card"><i class="fa-solid fa-heart-circle-bolt"></i><p>Test de Estrés</p></div>
+            <div class="card"><i class="fa-solid fa-headphones-simple"></i><p>Playlists</p></div>
+            <div class="card"><i class="fa-solid fa-hands-holding-circle"></i><p>Técnicas</p></div>
+            <div class="card"><i class="fa-solid fa-clipboard-list"></i><p>Tareas</p></div>
+        </div>
+        <div class="wide-card"><i class="fa-solid fa-clock"></i><p>Hora de Relajarse</p></div>
     </div>
 </body>
 </html>
