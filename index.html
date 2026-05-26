@@ -79,7 +79,6 @@
         .wide-card { background-color: var(--white); margin: 0 20px 20px; border-radius: 20px; padding: 15px 20px; display: flex; align-items: center; justify-content: center; gap: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; }
         .wide-card i { font-size: 28px; color: var(--gold-dark); }
         .wide-card p { font-size: 13px; color: var(--text-dark); font-weight: 600; text-align: left; }
-
         .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: flex-end; padding: 10px 20px 20px; border-top-left-radius: 30px; border-top-right-radius: 30px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 999; }
         .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 10px; cursor: pointer; text-decoration: none; width: 50px; }
         .nav-item i { font-size: 18px; margin-bottom: 5px; }
@@ -90,9 +89,7 @@
     </style>
 </head>
 <body>
-
     <div class="app-container" id="main-container">
-        <!-- PANTALLA DE INICIO -->
         <div id="view-home" class="view active">
             <header class="header">
                 <div class="logo">
@@ -101,7 +98,6 @@
                 <p class="subtitle">Bienvenido a MenteLuz.<br>Escanea para conectar.</p>
                 <button class="btn-main">INICIAR SESIÓN</button>
             </header>
-
             <main>
                 <div class="grid-menu">
                     <div class="card" id="btn-open-test">
@@ -121,14 +117,25 @@
                         <p>Organizador de<br>Tareas (Lab. y Univ.)</p>
                     </div>
                 </div>
-                <!-- SOLO ESTE ES TU BOTÓN HORA DE RELAJARSE -->
                 <div class="wide-card" id="btn-hora-relajarse">
                     <i class="fa-solid fa-clock"></i>
                     <p>Hora de Relajarse<br>(Programar)</p>
                 </div>
             </main>
         </div>
-        <!-- MÁS VISTAS... (pon aquí tus otras pantallas/funcionalidades) -->
+        <!-- Otras vistas (coloca aquí tus otros `.view` internos: #view-test, #view-tasks, etc) -->
+        <div id="view-test" class="view">
+          <div class="header">Pantalla de Test de Estrés</div>
+        </div>
+        <div id="view-playlists" class="view">
+          <div class="header">Pantalla de Playlists</div>
+        </div>
+        <div id="view-techniques" class="view">
+          <div class="header">Pantalla de Técnicas de Relajación</div>
+        </div>
+        <div id="view-tasks" class="view">
+          <div class="header">Pantalla de Organizador de Tareas</div>
+        </div>
         <nav class="bottom-nav">
             <a href="#" class="nav-item active" id="nav-home">
                 <i class="fa-solid fa-house"></i>
@@ -153,7 +160,7 @@
             </a>
         </nav>
     </div>
-    <!-- MODAL FUERA DEL CONTENEDOR PRINCIPAL -->
+    <!-- Modal fuera del contenedor principal, para evitar superposiciones -->
     <div id="modal-relax" style="display:none; position: fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(30,70,64,0.15); z-index:9999; align-items:center; justify-content:center;">
       <div style="background: #fff; padding: 30px 20px; border-radius: 25px; box-shadow: 0 8px 30px rgba(30,70,64,0.25); max-width: 320px; width: 95%; text-align: center; position:relative;">
         <h3 style="font-size:20px; margin-bottom: 15px; color:#1e4640;">Programa tu Hora de Relajación</h3>
@@ -171,9 +178,33 @@
       </div>
     </div>
     <script>
-        // --- TU SCRIPT de navegación, tareas, etc, aquí antes si lo tienes ---
-        // El siguiente código sólo abre el modal con el botón correcto:
+        // --- NAVEGACIÓN ENTRE VISTAS ---
+        const viewHome = document.getElementById('view-home');
+        const viewTest = document.getElementById('view-test');
+        const viewTasks = document.getElementById('view-tasks');
+        const viewPlaylists = document.getElementById('view-playlists');
+        const viewTechniques = document.getElementById('view-techniques');
+        // Botones menú grid
+        const btnOpenTest = document.getElementById('btn-open-test');
+        const btnOpenTasks = document.getElementById('btn-open-tasks');
+        const btnOpenPlaylists = document.getElementById('btn-open-playlists');
+        const btnOpenTechniques = document.getElementById('btn-open-techniques');
+        const navHome = document.getElementById('nav-home');
 
+        function hideAllViews() {
+            viewHome.classList.remove('active');
+            viewTest.classList.remove('active');
+            viewTasks.classList.remove('active');
+            viewPlaylists.classList.remove('active');
+            viewTechniques.classList.remove('active');
+        }
+        btnOpenTest.addEventListener('click', () => { hideAllViews(); viewTest.classList.add('active'); });
+        btnOpenTasks.addEventListener('click', () => { hideAllViews(); viewTasks.classList.add('active'); });
+        btnOpenPlaylists.addEventListener('click', () => { hideAllViews(); viewPlaylists.classList.add('active'); });
+        btnOpenTechniques.addEventListener('click', () => { hideAllViews(); viewTechniques.classList.add('active'); });
+        navHome.addEventListener('click', () => { hideAllViews(); viewHome.classList.add('active'); });
+
+        // --- MODAL HORA DE RELAJARSE ---
         const btnRelax = document.getElementById('btn-hora-relajarse');
         const modalRelax = document.getElementById('modal-relax');
         const btnConfirmRelax = document.getElementById('btn-confirm-relax');
@@ -181,19 +212,14 @@
         const relaxDay = document.getElementById('relax-day');
         const relaxTime = document.getElementById('relax-time');
 
-        // Solo ese botón abre el modal
         if(btnRelax){
             btnRelax.addEventListener('click', () => {
                 modalRelax.style.display = 'flex';
             });
         }
-
-        // Cierra modal
         btnCancelRelax.addEventListener('click', () => {
             modalRelax.style.display = 'none';
         });
-
-        // Confirmar y felicitar
         btnConfirmRelax.addEventListener('click', () => {
             const day = relaxDay.value;
             const time = relaxTime.value;
@@ -206,8 +232,6 @@
             alert(`¡Felicidades! 🎉\n\nHas programado tu momento de relajación para el ${day} a las ${horaFormateada}.\n¡Felicitaciones por dedicarte este tiempo!`);
             modalRelax.style.display = 'none';
         });
-
-        // ---- Aquí VA tu script de navegación original, menús, vistas, etc (como ya lo tenías) ----
     </script>
 </body>
 </html>
