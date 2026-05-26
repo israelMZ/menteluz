@@ -18,14 +18,7 @@
             --teal-btn: #4ea896;
             --teal-light: #a8d5cc;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Nunito', sans-serif;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
         body {
             background-color: #e0e0e0;
             display: flex;
@@ -33,7 +26,6 @@
             align-items: center;
             min-height: 100vh;
         }
-
         .app-container {
             width: 100%;
             max-width: 400px;
@@ -47,30 +39,15 @@
             border: 8px solid #333;
             transition: background-color 0.3s ease;
         }
-
-        .view {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
-            padding-bottom: 120px; 
-            height: 100%;
-            overflow-y: auto; 
-            overflow-x: hidden;
-        }
-        .view.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        .view { display: none; animation: fadeIn 0.3s ease-in-out; padding-bottom: 120px; height: 100%; overflow-y: auto; overflow-x: hidden; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .header { text-align: center; padding: 40px 20px 20px; }
         .logo { font-family: 'Cinzel', serif; font-size: 28px; color: var(--text-dark); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .logo i { color: var(--gold-dark); font-size: 20px; }
         .subtitle { color: var(--text-dark); font-size: 16px; margin-bottom: 25px; line-height: 1.4; }
         .btn-main { background: linear-gradient(to right, var(--gold-light), var(--gold-dark)); color: var(--white); border: none; width: 90%; padding: 15px; border-radius: 30px; font-size: 14px; font-weight: 700; letter-spacing: 1px; cursor: pointer; box-shadow: 0 4px 10px rgba(185, 139, 88, 0.4); margin-bottom: 30px; display: block; margin-left: auto; margin-right: auto; transition: transform 0.2s;}
         .btn-main:active { transform: scale(0.98); }
-
         .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; margin-bottom: 15px; }
         .card { background-color: var(--white); border-radius: 20px; padding: 20px 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
         .card:active { transform: scale(0.95); }
@@ -86,10 +63,14 @@
         .nav-center { position: relative; top: -20px; }
         .nav-center .circle { background: linear-gradient(to bottom right, var(--gold-light), var(--gold-dark)); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(185, 139, 88, 0.5); border: 4px solid var(--white); }
         .nav-center i { color: var(--white); font-size: 24px; margin: 0; }
+
+        /* El resto de tus estilos (tareas, técnicas, timer, test, etc) VAN AQUÍ directamente de tu código original */
+        /* ... */
     </style>
 </head>
 <body>
     <div class="app-container" id="main-container">
+        <!-- HOME -->
         <div id="view-home" class="view active">
             <header class="header">
                 <div class="logo">
@@ -123,18 +104,61 @@
                 </div>
             </main>
         </div>
-        <!-- Otras vistas (coloca aquí tus otros `.view` internos: #view-test, #view-tasks, etc) -->
+        <!-- TEST DE ESTRES (Pega tu pantalla original aquí) -->
         <div id="view-test" class="view">
-          <div class="header">Pantalla de Test de Estrés</div>
+            <div class="inner-header">
+                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2 class="test-title">Evalúa tu Nivel</h2>
+            </div>
+            <p class="test-subtitle">Inventario SISCO del estrés académico</p>
+            <form>
+                <div class="question-box">
+                    <p class="question-text">1. Durante el transcurso de este semestre ¿has tenido momentos de preocupación o nerviosismo?</p>
+                    <div class="options-group">
+                        <label class="radio-label"><input type="radio" name="q1" value="si"> Sí</label>
+                        <label class="radio-label"><input type="radio" name="q1" value="no"> No</label>
+                    </div>
+                </div>
+                <!-- ...tus demás preguntas y subpreguntas, igual que el código original... -->
+                <button type="button" class="btn-main" id="btn-resultados" style="margin-top: 10px; width: 85%;">VER RESULTADOS</button>
+            </form>
         </div>
+        <!-- PLAYLISTS -->
         <div id="view-playlists" class="view">
-          <div class="header">Pantalla de Playlists</div>
+            <div class="inner-header">
+                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>          
+            <div class="tasks-header-content">
+                <div class="tasks-logo">
+                    <i class="fa-regular fa-lightbulb"></i> MenteLuz
+                </div>
+                <h2 class="tasks-title" style="font-size: 22px;">PLAYLISTS<br>PARA RELAJARSE</h2>
+            </div>
+            <!--... tus playlist-cards igual que el código original ...-->
         </div>
+        <!-- TÉCNICAS DE RELAJACIÓN -->
         <div id="view-techniques" class="view">
-          <div class="header">Pantalla de Técnicas de Relajación</div>
+            <div class="inner-header">
+                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
+            <div class="tasks-header-content">
+                <div class="tasks-logo">
+                    <i class="fa-regular fa-lightbulb"></i> MenteLuz
+                </div>
+                <h2 class="tasks-title" style="font-size: 22px;">PASOS PARA<br>RELAJARSE</h2>
+            </div>
+            <!--...tu contenido original aquí...-->
         </div>
+        <!-- ORGANIZADOR DE TAREAS -->
         <div id="view-tasks" class="view">
-          <div class="header">Pantalla de Organizador de Tareas</div>
+            <div class="inner-header">
+                <button class="btn-back btn-close-view"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
+            <!--... resto del HTML del organizador como en tu código original ...-->
+        </div>
+        <!-- TIMER/CRONÓMETRO (si lo usas) -->
+        <div id="view-timer" class="view">
+            <!-- ... -->
         </div>
         <nav class="bottom-nav">
             <a href="#" class="nav-item active" id="nav-home">
@@ -160,7 +184,7 @@
             </a>
         </nav>
     </div>
-    <!-- Modal fuera del contenedor principal, para evitar superposiciones -->
+    <!-- MODAL HORA DE RELAJARSE -->
     <div id="modal-relax" style="display:none; position: fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(30,70,64,0.15); z-index:9999; align-items:center; justify-content:center;">
       <div style="background: #fff; padding: 30px 20px; border-radius: 25px; box-shadow: 0 8px 30px rgba(30,70,64,0.25); max-width: 320px; width: 95%; text-align: center; position:relative;">
         <h3 style="font-size:20px; margin-bottom: 15px; color:#1e4640;">Programa tu Hora de Relajación</h3>
@@ -178,44 +202,47 @@
       </div>
     </div>
     <script>
-        // --- NAVEGACIÓN ENTRE VISTAS ---
-        const viewHome = document.getElementById('view-home');
-        const viewTest = document.getElementById('view-test');
-        const viewTasks = document.getElementById('view-tasks');
-        const viewPlaylists = document.getElementById('view-playlists');
-        const viewTechniques = document.getElementById('view-techniques');
-        // Botones menú grid
-        const btnOpenTest = document.getElementById('btn-open-test');
-        const btnOpenTasks = document.getElementById('btn-open-tasks');
-        const btnOpenPlaylists = document.getElementById('btn-open-playlists');
-        const btnOpenTechniques = document.getElementById('btn-open-techniques');
-        const navHome = document.getElementById('nav-home');
-
+        // --- Navegación ---
+        const views = {
+            home: document.getElementById('view-home'),
+            test: document.getElementById('view-test'),
+            tasks: document.getElementById('view-tasks'),
+            playlists: document.getElementById('view-playlists'),
+            techniques: document.getElementById('view-techniques'),
+            timer: document.getElementById('view-timer'),
+        };
+        const btns = {
+            openTest: document.getElementById('btn-open-test'),
+            openTasks: document.getElementById('btn-open-tasks'),
+            openPlaylists: document.getElementById('btn-open-playlists'),
+            openTechniques: document.getElementById('btn-open-techniques'),
+            navHome: document.getElementById('nav-home')
+        };
         function hideAllViews() {
-            viewHome.classList.remove('active');
-            viewTest.classList.remove('active');
-            viewTasks.classList.remove('active');
-            viewPlaylists.classList.remove('active');
-            viewTechniques.classList.remove('active');
+            Object.values(views).forEach(v => v && v.classList.remove('active'));
         }
-        btnOpenTest.addEventListener('click', () => { hideAllViews(); viewTest.classList.add('active'); });
-        btnOpenTasks.addEventListener('click', () => { hideAllViews(); viewTasks.classList.add('active'); });
-        btnOpenPlaylists.addEventListener('click', () => { hideAllViews(); viewPlaylists.classList.add('active'); });
-        btnOpenTechniques.addEventListener('click', () => { hideAllViews(); viewTechniques.classList.add('active'); });
-        navHome.addEventListener('click', () => { hideAllViews(); viewHome.classList.add('active'); });
+        btns.openTest.addEventListener('click', () => { hideAllViews(); views.test.classList.add('active'); });
+        btns.openTasks.addEventListener('click', () => { hideAllViews(); views.tasks.classList.add('active'); });
+        btns.openPlaylists.addEventListener('click', () => { hideAllViews(); views.playlists.classList.add('active'); });
+        btns.openTechniques.addEventListener('click', () => { hideAllViews(); views.techniques.classList.add('active'); });
+        btns.navHome.addEventListener('click', () => { hideAllViews(); views.home.classList.add('active'); });
 
-        // --- MODAL HORA DE RELAJARSE ---
+        // Cierre de vistas (botón atrás donde aplica)
+        document.querySelectorAll('.btn-close-view').forEach(btn => {
+            btn.addEventListener('click', () => {
+                hideAllViews(); views.home.classList.add('active');
+            });
+        });
+
+        // Modal programar relajación
         const btnRelax = document.getElementById('btn-hora-relajarse');
         const modalRelax = document.getElementById('modal-relax');
         const btnConfirmRelax = document.getElementById('btn-confirm-relax');
         const btnCancelRelax = document.getElementById('btn-cancel-relax');
         const relaxDay = document.getElementById('relax-day');
         const relaxTime = document.getElementById('relax-time');
-
         if(btnRelax){
-            btnRelax.addEventListener('click', () => {
-                modalRelax.style.display = 'flex';
-            });
+            btnRelax.addEventListener('click', () => { modalRelax.style.display = 'flex'; });
         }
         btnCancelRelax.addEventListener('click', () => {
             modalRelax.style.display = 'none';
@@ -232,6 +259,9 @@
             alert(`¡Felicidades! 🎉\n\nHas programado tu momento de relajación para el ${day} a las ${horaFormateada}.\n¡Felicitaciones por dedicarte este tiempo!`);
             modalRelax.style.display = 'none';
         });
+
+        // Tu código de lógica original individual para agendas, listas, temporizador, etc, lo puedes agregar aquí abajo
+        // (Agrégalo aquí si es necesario, cada componente independiente)
     </script>
 </body>
 </html>
